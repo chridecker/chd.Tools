@@ -1,16 +1,9 @@
 using System.Net;
-using chd.Tools.LogServer.Extensions;
 using chd.Tools.LogServer.Model;
 using chd.Tools.LogServer.Services;
 using chd.Tools.LogServer.Settings;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.Extensions.Options;
-using NLog.Config;
-using NLog.Extensions.Logging;
-using NLog.Layouts;
-using NLog.Targets;
-using NLog.Web;
 
 namespace chd.Tools.LogServer
 {

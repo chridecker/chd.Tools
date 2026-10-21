@@ -1,5 +1,4 @@
-﻿using chd.Api.Base.Extensions;
-using chd.Tools.LogServer.Middleware;
+﻿using chd.Tools.LogServer.Middleware;
 using chd.Tools.LogServer.Model;
 using chd.Tools.LogServer.Services;
 using chd.Tools.LogServer.Settings;

@@ -1,6 +1,5 @@
 ﻿using chd.Tools.LogServer.Model;
 using chd.Tools.LogServer.Services;
-using NLog;
 using System.Net;
 using System.Text;
 using chd.Tools.LogServer.Settings;
