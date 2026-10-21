@@ -11,7 +11,7 @@ namespace chd.Tools.LogServer.Extensions
         public static IServiceCollection AddTools(this IServiceCollection services, AppSettings settings)
         {
             services.AddSingleton(settings);
-            services.AddSingleton<WebLoggerCache<HttpCallDto>>();
+            services.AddSingleton<WebLoggerCache>();
 
             return services;
         }

@@ -9,7 +9,7 @@ namespace chd.Tools.LogServer.Middleware
 {
     public class WebLogger(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, WebLoggerCache<HttpCallDto> cache, AppSettings settings)
+        public async Task InvokeAsync(HttpContext context, WebLoggerCache cache, AppSettings settings)
         {
             var dto = new HttpCallDto();
             await dto.Initialize(context);

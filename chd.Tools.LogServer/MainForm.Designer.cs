@@ -34,6 +34,9 @@ namespace chd.Tools.LogServer
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
+            httpCallDtoControl1 = new chd.Tools.LogServer.Controls.HttpCallDtoControl();
+            listBox1 = new ListBox();
+            bindingSourceLogList = new BindingSource(components);
             tabPage1 = new TabPage();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
@@ -43,12 +46,12 @@ namespace chd.Tools.LogServer
             textBoxUrl = new TextBox();
             labelPort = new Label();
             tabControl2 = new TabControl();
-            bindingSourceCache = new BindingSource(components);
             tabControl1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceCache).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -64,6 +67,8 @@ namespace chd.Tools.LogServer
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(httpCallDtoControl1);
+            tabPage2.Controls.Add(listBox1);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -71,6 +76,30 @@ namespace chd.Tools.LogServer
             tabPage2.TabIndex = 0;
             tabPage2.Text = "Log";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // httpCallDtoControl1
+            // 
+            httpCallDtoControl1.Dock = DockStyle.Right;
+            httpCallDtoControl1.Dto = null;
+            httpCallDtoControl1.Location = new Point(420, 3);
+            httpCallDtoControl1.Name = "httpCallDtoControl1";
+            httpCallDtoControl1.Size = new Size(985, 768);
+            httpCallDtoControl1.TabIndex = 1;
+            // 
+            // listBox1
+            // 
+            listBox1.DataSource = bindingSourceLogList;
+            listBox1.DisplayMember = "Identif";
+            listBox1.Dock = DockStyle.Left;
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(3, 3);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(411, 768);
+            listBox1.TabIndex = 0;
+            // 
+            // bindingSourceLogList
+            // 
+            bindingSourceLogList.DataSource = typeof(HttpCallDto);
             // 
             // tabPage1
             // 
@@ -152,10 +181,6 @@ namespace chd.Tools.LogServer
             tabControl2.Size = new Size(8, 8);
             tabControl2.TabIndex = 0;
             // 
-            // bindingSourceCache
-            // 
-            bindingSourceCache.DataSource = typeof(WebLoggerCache<HttpCallDto>);
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -165,11 +190,12 @@ namespace chd.Tools.LogServer
             Name = "MainForm";
             Text = "chd Log Server";
             tabControl1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceCache).EndInit();
             ResumeLayout(false);
         }
 
@@ -181,11 +207,13 @@ namespace chd.Tools.LogServer
         private TabControl tabControl2;
         private TabPage tabPage2;
         private BindingSource bindingSourceAppsetting;
-        private BindingSource bindingSourceCache;
         private TextBox textBoxUrl;
         private NumericUpDown numericUpDownmaxEntries;
         private ComboBox comboBox1;
         private TextBox textBox1;
         private Label label1;
+        private BindingSource bindingSourceLogList;
+        private ListBox listBox1;
+        private Controls.HttpCallDtoControl httpCallDtoControl1;
     }
 }

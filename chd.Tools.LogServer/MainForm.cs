@@ -10,18 +10,40 @@ namespace chd.Tools.LogServer
     public partial class MainForm : Form
     {
         private readonly AppSettings _appSettings;
-        private readonly WebLoggerCache<HttpCallDto> _cache;
+        private readonly WebLoggerCache _cache;
 
-        public MainForm(AppSettings appSettings, WebLoggerCache<HttpCallDto> cache, IServer server)
+        public MainForm(AppSettings appSettings, WebLoggerCache cache, IServer server)
         {
             _appSettings = appSettings;
             _cache = cache;
+            _cache.DataChanged += _cache_DataChanged;
             InitializeComponent();
             this.bindingSourceAppsetting.DataSource = _appSettings;
-            this.bindingSourceCache.DataSource = _cache;
             var addresses = server.Features.Get<IServerAddressesFeature>();
             this.textBoxUrl.Text = string.Join(",", addresses?.Addresses ?? Enumerable.Empty<string>());
             this.LoadStatusCodes();
+            bindingSourceLogList.CurrentChanged += BindingSourceLogList_CurrentChanged;
+        }
+
+        private void BindingSourceLogList_CurrentChanged(object? sender, EventArgs e)
+        {
+            if (sender is BindingSource bs
+                && bs.Current is HttpCallDto dto)
+            {
+                httpCallDtoControl1.Dto = dto;
+            }
+        }
+
+        private void _cache_DataChanged(object? sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(() => this.bindingSourceLogList.DataSource = _cache.Data);
+            }
+            else
+            {
+                this.bindingSourceLogList.DataSource = _cache.Data;
+            }
         }
 
         private void LoadStatusCodes()

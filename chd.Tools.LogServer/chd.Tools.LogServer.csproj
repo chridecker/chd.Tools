@@ -10,5 +10,8 @@
 	<ItemGroup>
 		<PackageReference Include="OswaldTechnologies.Extensions.Hosting.WindowsFormsLifetime" Version="2.0.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Properties\DataSources\" />
+	</ItemGroup>
 
 </Project>
