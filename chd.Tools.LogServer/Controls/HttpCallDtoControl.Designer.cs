@@ -37,6 +37,10 @@ namespace chd.Tools.LogServer.Controls
             txtQuery = new TextBox();
             lblApiKey = new Label();
             txtApiKey = new TextBox();
+            lblUsername = new Label();
+            txtUsername = new TextBox();
+            lblPassword = new Label();
+            txtPassword = new TextBox();
             lblHost = new Label();
             txtHost = new TextBox();
             lblRemoteIp = new Label();
@@ -75,19 +79,23 @@ namespace chd.Tools.LogServer.Controls
             tableLayoutPanel.Controls.Add(txtPath, 1, 4);
             tableLayoutPanel.Controls.Add(lblQuery, 0, 5);
             tableLayoutPanel.Controls.Add(txtQuery, 1, 5);
-            tableLayoutPanel.Controls.Add(lblApiKey, 0, 6);
-            tableLayoutPanel.Controls.Add(txtApiKey, 1, 6);
+            tableLayoutPanel.Controls.Add(lblApiKey, 0, 7);
+            tableLayoutPanel.Controls.Add(txtApiKey, 1, 7);
+            tableLayoutPanel.Controls.Add(lblUsername, 0, 8);
+            tableLayoutPanel.Controls.Add(txtUsername, 1, 8);
+            tableLayoutPanel.Controls.Add(lblPassword, 0, 9);
+            tableLayoutPanel.Controls.Add(txtPassword, 1, 9);
             tableLayoutPanel.Controls.Add(lblHost, 0, 2);
             tableLayoutPanel.Controls.Add(txtHost, 1, 2);
             tableLayoutPanel.Controls.Add(lblRemoteIp, 0, 1);
             tableLayoutPanel.Controls.Add(txtRemoteIp, 1, 1);
-            tableLayoutPanel.Controls.Add(lblResponseStatusCode, 0, 7);
-            tableLayoutPanel.Controls.Add(txtResponseStatusCode, 1, 7);
+            tableLayoutPanel.Controls.Add(lblResponseStatusCode, 0, 6);
+            tableLayoutPanel.Controls.Add(txtResponseStatusCode, 1, 6);
             tableLayoutPanel.Dock = DockStyle.Top;
             tableLayoutPanel.Location = new Point(0, 0);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.Padding = new Padding(5);
-            tableLayoutPanel.RowCount = 8;
+            tableLayoutPanel.RowCount = 9;
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
@@ -96,7 +104,9 @@ namespace chd.Tools.LogServer.Controls
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel.Size = new Size(900, 170);
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel.Size = new Size(900, 210);
             tableLayoutPanel.TabIndex = 2;
             // 
             // lblTime
@@ -165,7 +175,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             // lblApiKey
             // 
-            lblApiKey.Location = new Point(8, 125);
+            lblApiKey.Location = new Point(8, 145);
             lblApiKey.Name = "lblApiKey";
             lblApiKey.Size = new Size(100, 20);
             lblApiKey.TabIndex = 8;
@@ -174,10 +184,42 @@ namespace chd.Tools.LogServer.Controls
             // txtApiKey
             // 
             txtApiKey.DataBindings.Add(new Binding("Text", bindingSourceDto, "ApiKey", true));
-            txtApiKey.Location = new Point(148, 128);
+            txtApiKey.Location = new Point(148, 148);
             txtApiKey.Name = "txtApiKey";
             txtApiKey.Size = new Size(100, 23);
             txtApiKey.TabIndex = 9;
+            // 
+            // lblUsername
+            // 
+            lblUsername.Location = new Point(8, 165);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(100, 20);
+            lblUsername.TabIndex = 8;
+            lblUsername.Text = "Basic Username";
+            // 
+            // txtUsername
+            // 
+            txtUsername.DataBindings.Add(new Binding("Text", bindingSourceDto, "Username", true));
+            txtUsername.Location = new Point(148, 168);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(100, 23);
+            txtUsername.TabIndex = 9;
+            // 
+            // lblPassword
+            // 
+            lblPassword.Location = new Point(8, 185);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(100, 20);
+            lblPassword.TabIndex = 8;
+            lblPassword.Text = "Basic Password";
+            // 
+            // txtPassword
+            // 
+            txtPassword.DataBindings.Add(new Binding("Text", bindingSourceDto, "Password", true));
+            txtPassword.Location = new Point(148, 188);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(100, 23);
+            txtPassword.TabIndex = 9;
             // 
             // lblHost
             // 
@@ -213,7 +255,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             // lblResponseStatusCode
             // 
-            lblResponseStatusCode.Location = new Point(8, 145);
+            lblResponseStatusCode.Location = new Point(8, 125);
             lblResponseStatusCode.Name = "lblResponseStatusCode";
             lblResponseStatusCode.Size = new Size(100, 20);
             lblResponseStatusCode.TabIndex = 12;
@@ -222,7 +264,7 @@ namespace chd.Tools.LogServer.Controls
             // txtResponseStatusCode
             // 
             txtResponseStatusCode.DataBindings.Add(new Binding("Text", bindingSourceDto, "ResponseStatusCode", true));
-            txtResponseStatusCode.Location = new Point(148, 148);
+            txtResponseStatusCode.Location = new Point(148, 128);
             txtResponseStatusCode.Name = "txtResponseStatusCode";
             txtResponseStatusCode.Size = new Size(100, 23);
             txtResponseStatusCode.TabIndex = 5;
@@ -231,7 +273,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             grpBody.Controls.Add(txtBody);
             grpBody.Dock = DockStyle.Top;
-            grpBody.Location = new Point(0, 350);
+            grpBody.Location = new Point(0, 390);
             grpBody.Name = "grpBody";
             grpBody.Size = new Size(900, 180);
             grpBody.TabIndex = 1;
@@ -255,7 +297,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             grpResponseBody.Controls.Add(txtResponseBody);
             grpResponseBody.Dock = DockStyle.Top;
-            grpResponseBody.Location = new Point(0, 170);
+            grpResponseBody.Location = new Point(0, 210);
             grpResponseBody.Name = "grpResponseBody";
             grpResponseBody.Size = new Size(900, 180);
             grpResponseBody.TabIndex = 1;
@@ -279,9 +321,9 @@ namespace chd.Tools.LogServer.Controls
             // 
             grpHeaders.Controls.Add(dgvHeaders);
             grpHeaders.Dock = DockStyle.Fill;
-            grpHeaders.Location = new Point(0, 530);
+            grpHeaders.Location = new Point(0, 570);
             grpHeaders.Name = "grpHeaders";
-            grpHeaders.Size = new Size(900, 170);
+            grpHeaders.Size = new Size(900, 130);
             grpHeaders.TabIndex = 0;
             grpHeaders.TabStop = false;
             grpHeaders.Text = "Headers";
@@ -295,7 +337,7 @@ namespace chd.Tools.LogServer.Controls
             dgvHeaders.Location = new Point(3, 19);
             dgvHeaders.Name = "dgvHeaders";
             dgvHeaders.ReadOnly = true;
-            dgvHeaders.Size = new Size(894, 148);
+            dgvHeaders.Size = new Size(894, 108);
             dgvHeaders.TabIndex = 0;
             // 
             // HttpCallDtoControl
@@ -328,6 +370,8 @@ namespace chd.Tools.LogServer.Controls
         private Label lblPath;
         private Label lblQuery;
         private Label lblApiKey;
+        private Label lblUsername;
+        private Label lblPassword;
         private Label lblHost;
         private Label lblRemoteIp;
         private Label lblResponseStatusCode;
@@ -337,13 +381,15 @@ namespace chd.Tools.LogServer.Controls
         private TextBox txtPath;
         private TextBox txtQuery;
         private TextBox txtApiKey;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
         private TextBox txtHost;
         private TextBox txtRemoteIp;
         private TextBox txtResponseStatusCode;
 
         private GroupBox grpBody;
         private TextBox txtBody;
-        
+
         private GroupBox grpResponseBody;
         private TextBox txtResponseBody;
 
