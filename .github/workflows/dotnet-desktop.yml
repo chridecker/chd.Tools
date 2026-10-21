@@ -45,4 +45,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: WinForms-win-x64
-          path: ./**/bin/Release/**/publish/*.exe
+          path: publish/*.exe
