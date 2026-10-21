@@ -22,12 +22,6 @@ namespace chd.Tools.LogServer.Services
 
         public List<HttpCallDto> Data => _data.OrderByDescending(o => o.DateTimeOffset).ToList();
 
-        public void Remove(HttpCallDto data)
-        {
-            _data.TryTake(out _);
-            NotifyData();
-        }
-
         public void Clear()
         {
             _data.Clear();

@@ -13,10 +13,12 @@ namespace chd.Tools.LogServer.Middleware
         {
             var dto = new HttpCallDto();
             await dto.Initialize(context);
-            cache.Add(dto);
+            dto.ResponseStatusCode = settings.ResponseStatusCode;
+            dto.ResponseBody = settings.Response;
             context.Response.StatusCode = (int)settings.ResponseStatusCode;
             context.Response.ContentType = "application/json";
             await context.Response.WriteAsync(settings.Response);
+            cache.Add(dto);
             await next(context);
         }
     }

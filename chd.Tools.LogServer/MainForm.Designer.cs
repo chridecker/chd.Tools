@@ -32,11 +32,20 @@ namespace chd.Tools.LogServer
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
-            httpCallDtoControl1 = new chd.Tools.LogServer.Controls.HttpCallDtoControl();
-            listBox1 = new ListBox();
+            dataGridView1 = new DataGridView();
+            dateTimeOffsetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            hostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            methodDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pathDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            apiKeyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            queryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bodyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            headersDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bindingSourceLogList = new BindingSource(components);
+            httpCallDtoControl1 = new chd.Tools.LogServer.Controls.HttpCallDtoControl();
             tabPage1 = new TabPage();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
@@ -46,12 +55,18 @@ namespace chd.Tools.LogServer
             textBoxUrl = new TextBox();
             labelPort = new Label();
             tabControl2 = new TabControl();
+            splitContainer1 = new SplitContainer();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -67,8 +82,7 @@ namespace chd.Tools.LogServer
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(httpCallDtoControl1);
-            tabPage2.Controls.Add(listBox1);
+            tabPage2.Controls.Add(splitContainer1);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -77,29 +91,110 @@ namespace chd.Tools.LogServer
             tabPage2.Text = "Log";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // httpCallDtoControl1
+            // dataGridView1
             // 
-            httpCallDtoControl1.Dock = DockStyle.Right;
-            httpCallDtoControl1.Dto = null;
-            httpCallDtoControl1.Location = new Point(420, 3);
-            httpCallDtoControl1.Name = "httpCallDtoControl1";
-            httpCallDtoControl1.Size = new Size(985, 768);
-            httpCallDtoControl1.TabIndex = 1;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dateTimeOffsetDataGridViewTextBoxColumn, hostDataGridViewTextBoxColumn, methodDataGridViewTextBoxColumn, pathDataGridViewTextBoxColumn, apiKeyDataGridViewTextBoxColumn, queryDataGridViewTextBoxColumn, bodyDataGridViewTextBoxColumn, headersDataGridViewTextBoxColumn });
+            dataGridView1.DataSource = bindingSourceLogList;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ShowCellErrors = false;
+            dataGridView1.ShowCellToolTips = false;
+            dataGridView1.ShowEditingIcon = false;
+            dataGridView1.ShowRowErrors = false;
+            dataGridView1.Size = new Size(467, 768);
+            dataGridView1.TabIndex = 2;
             // 
-            // listBox1
+            // dateTimeOffsetDataGridViewTextBoxColumn
             // 
-            listBox1.DataSource = bindingSourceLogList;
-            listBox1.DisplayMember = "Identif";
-            listBox1.Dock = DockStyle.Left;
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(3, 3);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(411, 768);
-            listBox1.TabIndex = 0;
+            dateTimeOffsetDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dateTimeOffsetDataGridViewTextBoxColumn.DataPropertyName = "DateTimeOffset";
+            dataGridViewCellStyle3.Format = "HH:mm:ss dd.MM.yyyy";
+            dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dateTimeOffsetDataGridViewTextBoxColumn.HeaderText = "Time";
+            dateTimeOffsetDataGridViewTextBoxColumn.Name = "dateTimeOffsetDataGridViewTextBoxColumn";
+            dateTimeOffsetDataGridViewTextBoxColumn.ReadOnly = true;
+            dateTimeOffsetDataGridViewTextBoxColumn.Width = 59;
+            // 
+            // hostDataGridViewTextBoxColumn
+            // 
+            hostDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            hostDataGridViewTextBoxColumn.DataPropertyName = "Host";
+            hostDataGridViewTextBoxColumn.HeaderText = "Host";
+            hostDataGridViewTextBoxColumn.Name = "hostDataGridViewTextBoxColumn";
+            hostDataGridViewTextBoxColumn.ReadOnly = true;
+            hostDataGridViewTextBoxColumn.Width = 57;
+            // 
+            // methodDataGridViewTextBoxColumn
+            // 
+            methodDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            methodDataGridViewTextBoxColumn.DataPropertyName = "Method";
+            methodDataGridViewTextBoxColumn.HeaderText = "Method";
+            methodDataGridViewTextBoxColumn.Name = "methodDataGridViewTextBoxColumn";
+            methodDataGridViewTextBoxColumn.ReadOnly = true;
+            methodDataGridViewTextBoxColumn.Width = 74;
+            // 
+            // pathDataGridViewTextBoxColumn
+            // 
+            pathDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            pathDataGridViewTextBoxColumn.DataPropertyName = "Path";
+            pathDataGridViewTextBoxColumn.HeaderText = "Path";
+            pathDataGridViewTextBoxColumn.Name = "pathDataGridViewTextBoxColumn";
+            pathDataGridViewTextBoxColumn.ReadOnly = true;
+            pathDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // apiKeyDataGridViewTextBoxColumn
+            // 
+            apiKeyDataGridViewTextBoxColumn.DataPropertyName = "ApiKey";
+            apiKeyDataGridViewTextBoxColumn.HeaderText = "ApiKey";
+            apiKeyDataGridViewTextBoxColumn.Name = "apiKeyDataGridViewTextBoxColumn";
+            apiKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            apiKeyDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // queryDataGridViewTextBoxColumn
+            // 
+            queryDataGridViewTextBoxColumn.DataPropertyName = "Query";
+            queryDataGridViewTextBoxColumn.HeaderText = "Query";
+            queryDataGridViewTextBoxColumn.Name = "queryDataGridViewTextBoxColumn";
+            queryDataGridViewTextBoxColumn.ReadOnly = true;
+            queryDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // bodyDataGridViewTextBoxColumn
+            // 
+            bodyDataGridViewTextBoxColumn.DataPropertyName = "Body";
+            bodyDataGridViewTextBoxColumn.HeaderText = "Body";
+            bodyDataGridViewTextBoxColumn.Name = "bodyDataGridViewTextBoxColumn";
+            bodyDataGridViewTextBoxColumn.ReadOnly = true;
+            bodyDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // headersDataGridViewTextBoxColumn
+            // 
+            headersDataGridViewTextBoxColumn.DataPropertyName = "Headers";
+            headersDataGridViewTextBoxColumn.HeaderText = "Headers";
+            headersDataGridViewTextBoxColumn.Name = "headersDataGridViewTextBoxColumn";
+            headersDataGridViewTextBoxColumn.ReadOnly = true;
+            headersDataGridViewTextBoxColumn.Visible = false;
             // 
             // bindingSourceLogList
             // 
             bindingSourceLogList.DataSource = typeof(HttpCallDto);
+            // 
+            // httpCallDtoControl1
+            // 
+            httpCallDtoControl1.Dock = DockStyle.Fill;
+            httpCallDtoControl1.Location = new Point(0, 0);
+            httpCallDtoControl1.Name = "httpCallDtoControl1";
+            httpCallDtoControl1.Size = new Size(931, 768);
+            httpCallDtoControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -181,6 +276,23 @@ namespace chd.Tools.LogServer
             tabControl2.Size = new Size(8, 8);
             tabControl2.TabIndex = 0;
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(3, 3);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(dataGridView1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(httpCallDtoControl1);
+            splitContainer1.Size = new Size(1402, 768);
+            splitContainer1.SplitterDistance = 467;
+            splitContainer1.TabIndex = 3;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -191,11 +303,16 @@ namespace chd.Tools.LogServer
             Text = "chd Log Server";
             tabControl1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).EndInit();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -213,7 +330,17 @@ namespace chd.Tools.LogServer
         private TextBox textBox1;
         private Label label1;
         private BindingSource bindingSourceLogList;
-        private ListBox listBox1;
         private Controls.HttpCallDtoControl httpCallDtoControl1;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn dateTimeOffsetDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn remoteIpAddressDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn hostDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn methodDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn apiKeyDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn queryDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn headersDataGridViewTextBoxColumn;
+        private SplitContainer splitContainer1;
     }
 }

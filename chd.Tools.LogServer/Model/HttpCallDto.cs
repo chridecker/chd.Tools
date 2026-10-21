@@ -7,10 +7,6 @@ namespace chd.Tools.LogServer.Model
 {
     public class HttpCallDto
     {
-        public string Identif => $"{DateTimeOffset.ToLocalTime().ToString("HH:mm:ss dd.MM.yyyy")}: " +
-                                    $"{Host}[{RemoteIpAddress}] {(string.IsNullOrWhiteSpace(ApiKey) ? string.Empty : $"({ApiKey}) ")}" +
-                                    $"{Method} {Path}";
-
         public DateTimeOffset DateTimeOffset { get; } = DateTimeOffset.Now;
         public string Method { get; set; }
         public string Path { get; set; }
@@ -18,6 +14,8 @@ namespace chd.Tools.LogServer.Model
         public string? ApiKey { get; set; }
         public string Host { get; set; }
         public string Body { get; set; }
+        public HttpStatusCode ResponseStatusCode { get; set; }
+        public string ResponseBody { get; set; }
 
         public Dictionary<string, string> Headers { get; } = [];
 

@@ -15,29 +15,34 @@ namespace chd.Tools.LogServer.Controls
         public HttpCallDtoControl()
         {
             InitializeComponent();
-        }
-        [Browsable(false)]
-        public Model.HttpCallDto? Dto
-        {
-            get => bindingSourceDto.DataSource as Model.HttpCallDto;
-            set
+            foreach (var comp in this.tableLayoutPanel.Controls)
             {
-                bindingSourceDto.DataSource = value;
-
-                dgvHeaders.DataSource = value?.Headers
-                    .Select(x => new HeaderEntry
-                    {
-                        Name = x.Key,
-                        Value = x.Value
-                    })
-                    .ToList();
+                if (comp is TextBox tb)
+                {
+                    tb.Dock = DockStyle.Fill;
+                    tb.ReadOnly = true;
+                }
+            }
+            foreach (var comp in this.grpBody.Controls)
+            {
+                if (comp is TextBox tb)
+                {
+                    tb.Dock = DockStyle.Fill;
+                    tb.ReadOnly = true;
+                }
             }
         }
 
-        private sealed class HeaderEntry
+        public void SetDto(HttpCallDto dto)
         {
-            public string Name { get; set; } = "";
-            public string Value { get; set; } = "";
+            this.bindingSourceDto.DataSource = dto;
+            dgvHeaders.DataSource = dto.Headers
+                .Select(h => new
+                {
+                    Name = h.Key,
+                    Value = h.Value
+                })
+                .ToList();
         }
     }
 

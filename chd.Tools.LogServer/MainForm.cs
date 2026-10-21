@@ -23,6 +23,27 @@ namespace chd.Tools.LogServer
             this.textBoxUrl.Text = string.Join(",", addresses?.Addresses ?? Enumerable.Empty<string>());
             this.LoadStatusCodes();
             bindingSourceLogList.CurrentChanged += BindingSourceLogList_CurrentChanged;
+            dataGridView1.CellMouseClick += DataGridView1_CellMouseClick; ;
+        }
+
+        private void DataGridView1_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right || e.RowIndex < 0)
+            {
+                return;
+            }
+
+            // Zeile selektieren
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[e.RowIndex].Selected = true;
+            dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[0];
+
+            var menu = new ContextMenuStrip();
+            menu.Items.Add("Clear", null, (_, _) =>
+            {
+                _cache.Clear();
+            });
+            menu.Show(Cursor.Position);
         }
 
         private void BindingSourceLogList_CurrentChanged(object? sender, EventArgs e)
@@ -30,7 +51,7 @@ namespace chd.Tools.LogServer
             if (sender is BindingSource bs
                 && bs.Current is HttpCallDto dto)
             {
-                httpCallDtoControl1.Dto = dto;
+                httpCallDtoControl1.SetDto(dto);
             }
         }
 
