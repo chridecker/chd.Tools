@@ -1,17 +1,25 @@
-﻿using chd.Tools.LogServer.Services;
+﻿using chd.Tools.LogServer.Extensions;
+using chd.Tools.LogServer.Model;
+using chd.Tools.LogServer.Services;
 using chd.Tools.LogServer.Settings;
+using Microsoft.AspNetCore.SignalR.Protocol;
 using System.Net.WebSockets;
+using System.Text;
+using static chd.Tools.LogServer.Model.SignalRMessage;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace chd.Tools.LogServer.Middleware
 {
     public class SignalRForward(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, AppSettings settings, IHttpClientFactory httpClientFactory,
-            CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, AppSettings settings, SignalRCache cache)
         {
             if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && context.WebSockets.IsWebSocketRequest)
             {
+                var dto = new SignalRConnectionDto();
+                await dto.Initialize(context);
+
                 var http = new Uri(
                     $"{settings.ForwardUrl.TrimEnd('/')}{context.Request.Path}{context.Request.QueryString}");
                 var wsUri = new UriBuilder(http)
@@ -41,8 +49,6 @@ namespace chd.Tools.LogServer.Middleware
                     upstream.Options.SetRequestHeader("x-api-key", apiKey.ToString());
                 }
 
-
-
                 foreach (var name in new[] { "Cookie", "User-Agent" })
                 {
                     if (context.Request.Headers.TryGetValue(name, out var v))
@@ -67,8 +73,11 @@ namespace chd.Tools.LogServer.Middleware
 
                 using var cts = CancellationTokenSource.CreateLinkedTokenSource(context.RequestAborted);
 
-                var t1 = Pump(client, upstream, cts.Token);
-                var t2 = Pump(upstream, client, cts.Token);
+                dto.Connected = true;
+                cache.Add(dto);
+
+                var t1 = Pump(client, upstream, dto, "Send", cts.Token);
+                var t2 = Pump(upstream, client, dto, "Receive", cts.Token);
 
                 await Task.WhenAny(t1, t2);
                 cts.Cancel();
@@ -82,13 +91,16 @@ namespace chd.Tools.LogServer.Middleware
                 catch (WebSocketException)
                 {
                 }
+                dto.Connected = false;
 
                 return;
             }
         }
-        static async Task Pump(WebSocket from, WebSocket to, CancellationToken ct)
+        static async Task Pump(WebSocket from, WebSocket to, SignalRConnectionDto dto, string direction, CancellationToken ct)
         {
             var buffer = new byte[16 * 1024];
+            using var message = new MemoryStream();
+
             while (!ct.IsCancellationRequested)
             {
                 var r = await from.ReceiveAsync(buffer, ct);
@@ -102,7 +114,40 @@ namespace chd.Tools.LogServer.Middleware
                 }
 
                 await to.SendAsync(buffer.AsMemory(0, r.Count), r.MessageType, r.EndOfMessage, ct);
+
+                message.Write(buffer, 0, r.Count);
+
+
+                if (!r.EndOfMessage)
+                {
+                    continue;
+                }
+
+                var data = ReadData(message.ToArray(), r.MessageType);
+
+                foreach (var msg in GetMessages(data))
+                {
+                    msg.Data = data;
+                    msg.Direction = direction;
+                    msg.Type = r.MessageType;
+                    dto.AddMessage(msg);
+                }
+
+                message.SetLength(0);
             }
         }
+
+        static string ReadData(byte[] data, WebSocketMessageType type)
+        => type is WebSocketMessageType.Text ? Encoding.UTF8.GetString(data) : Convert.ToHexString(data.AsSpan(0, Math.Min(data.Length, 256)));
+
+        static IEnumerable<SignalRMessage> GetMessages(string json)
+            => json.ParseFrame().Select(s => Parse(s.Type, s.Json));
+
+        private static SignalRMessage Parse(SignalRMessageType type, string json) => (type) switch
+        {
+            SignalRMessageType.Invocation => new SignalRInvocationMessage(json.RootValue("target"), json.RootValueArray("arguments")),
+            SignalRMessageType.Ping => new SignalRPingMessage(),
+            _ => new SignalRMessage(SignalRMessageType.None)
+        };
     }
 }

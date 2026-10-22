@@ -47,16 +47,31 @@ namespace chd.Tools.LogServer
             headersDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bindingSourceLogList = new BindingSource(components);
             httpCallDtoControl1 = new chd.Tools.LogServer.Controls.HttpCallDtoControl();
+            tabPage3 = new TabPage();
+            splitContainer2 = new SplitContainer();
+            dataGridView2 = new DataGridView();
+            bindingSourceSignalRLog = new BindingSource(components);
+            signalrCallDtoControl1 = new chd.Tools.LogServer.Controls.SignalRCallDtoControl();
             tabPage1 = new TabPage();
+            label1 = new Label();
+            textBox2 = new TextBox();
+            bindingSourceAppsetting = new BindingSource(components);
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
-            bindingSourceAppsetting = new BindingSource(components);
-            label1 = new Label();
-            numericUpDownmaxEntries = new NumericUpDown();
             textBoxUrl = new TextBox();
             labelPort = new Label();
             tabControl2 = new TabControl();
-            textBox2 = new TextBox();
+            pathDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dateTimeOffsetDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            hostDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            connectedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            apiKeyDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            forwardUrlDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            isWebSocketDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            methodDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            queryDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            headersDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -65,14 +80,21 @@ namespace chd.Tools.LogServer
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).BeginInit();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceSignalRLog).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
@@ -214,13 +236,67 @@ namespace chd.Tools.LogServer
             httpCallDtoControl1.Size = new Size(931, 768);
             httpCallDtoControl1.TabIndex = 1;
             // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(splitContainer2);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1408, 774);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "SignalR";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.Location = new Point(3, 3);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(dataGridView2);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(signalrCallDtoControl1);
+            splitContainer2.Size = new Size(1402, 768);
+            splitContainer2.SplitterDistance = 467;
+            splitContainer2.TabIndex = 0;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.AutoGenerateColumns = false;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { pathDataGridViewTextBoxColumn1, dateTimeOffsetDataGridViewTextBoxColumn1, hostDataGridViewTextBoxColumn1, dataGridViewTextBoxColumn1, connectedDataGridViewCheckBoxColumn, apiKeyDataGridViewTextBoxColumn1, forwardUrlDataGridViewTextBoxColumn, isWebSocketDataGridViewCheckBoxColumn, methodDataGridViewTextBoxColumn1, queryDataGridViewTextBoxColumn1, headersDataGridViewTextBoxColumn1 });
+            dataGridView2.DataSource = bindingSourceSignalRLog;
+            dataGridView2.Dock = DockStyle.Fill;
+            dataGridView2.Location = new Point(0, 0);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.ReadOnly = true;
+            dataGridView2.Size = new Size(467, 768);
+            dataGridView2.TabIndex = 0;
+            // 
+            // bindingSourceSignalRLog
+            // 
+            bindingSourceSignalRLog.DataSource = typeof(SignalRConnectionDto);
+            // 
+            // signalrCallDtoControl1
+            // 
+            signalrCallDtoControl1.Dock = DockStyle.Fill;
+            signalrCallDtoControl1.Location = new Point(0, 0);
+            signalrCallDtoControl1.Name = "signalrCallDtoControl1";
+            signalrCallDtoControl1.Size = new Size(931, 768);
+            signalrCallDtoControl1.TabIndex = 0;
+            // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(textBox2);
             tabPage1.Controls.Add(comboBox1);
             tabPage1.Controls.Add(textBox1);
-            tabPage1.Controls.Add(label1);
-            tabPage1.Controls.Add(numericUpDownmaxEntries);
             tabPage1.Controls.Add(textBoxUrl);
             tabPage1.Controls.Add(labelPort);
             tabPage1.Controls.Add(tabControl2);
@@ -232,10 +308,31 @@ namespace chd.Tools.LogServer
             tabPage1.Text = "Server";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(366, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 15);
+            label1.TabIndex = 11;
+            label1.Text = "Forward Url";
+            // 
+            // textBox2
+            // 
+            textBox2.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "ForwardUrl", true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox2.Location = new Point(440, 6);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(273, 23);
+            textBox2.TabIndex = 10;
+            // 
+            // bindingSourceAppsetting
+            // 
+            bindingSourceAppsetting.DataSource = typeof(Settings.AppSettings);
+            // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(403, 6);
+            comboBox1.Location = new Point(229, 6);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 9;
@@ -248,27 +345,6 @@ namespace chd.Tools.LogServer
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(387, 246);
             textBox1.TabIndex = 8;
-            // 
-            // bindingSourceAppsetting
-            // 
-            bindingSourceAppsetting.DataSource = typeof(Settings.AppSettings);
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(229, 11);
-            label1.Name = "label1";
-            label1.Size = new Size(52, 15);
-            label1.TabIndex = 7;
-            label1.Text = "Max Log";
-            // 
-            // numericUpDownmaxEntries
-            // 
-            numericUpDownmaxEntries.DataBindings.Add(new Binding("Value", bindingSourceAppsetting, "MaxEntries", true, DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
-            numericUpDownmaxEntries.Location = new Point(287, 6);
-            numericUpDownmaxEntries.Name = "numericUpDownmaxEntries";
-            numericUpDownmaxEntries.Size = new Size(57, 23);
-            numericUpDownmaxEntries.TabIndex = 6;
             // 
             // textBoxUrl
             // 
@@ -295,13 +371,96 @@ namespace chd.Tools.LogServer
             tabControl2.Size = new Size(8, 8);
             tabControl2.TabIndex = 0;
             // 
-            // textBox2
+            // pathDataGridViewTextBoxColumn1
             // 
-            textBox2.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "ForwardUrl", true, DataSourceUpdateMode.OnPropertyChanged));
-            textBox2.Location = new Point(545, 5);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(273, 23);
-            textBox2.TabIndex = 10;
+            pathDataGridViewTextBoxColumn1.DataPropertyName = "Path";
+            pathDataGridViewTextBoxColumn1.HeaderText = "Path";
+            pathDataGridViewTextBoxColumn1.Name = "pathDataGridViewTextBoxColumn1";
+            pathDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dateTimeOffsetDataGridViewTextBoxColumn1
+            // 
+            dateTimeOffsetDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dateTimeOffsetDataGridViewTextBoxColumn1.DataPropertyName = "DateTimeOffset";
+            dateTimeOffsetDataGridViewTextBoxColumn1.HeaderText = "DateTimeOffset";
+            dateTimeOffsetDataGridViewTextBoxColumn1.Name = "dateTimeOffsetDataGridViewTextBoxColumn1";
+            dateTimeOffsetDataGridViewTextBoxColumn1.ReadOnly = true;
+            dateTimeOffsetDataGridViewTextBoxColumn1.Width = 115;
+            // 
+            // hostDataGridViewTextBoxColumn1
+            // 
+            hostDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            hostDataGridViewTextBoxColumn1.DataPropertyName = "Host";
+            hostDataGridViewTextBoxColumn1.HeaderText = "Host";
+            hostDataGridViewTextBoxColumn1.Name = "hostDataGridViewTextBoxColumn1";
+            hostDataGridViewTextBoxColumn1.ReadOnly = true;
+            hostDataGridViewTextBoxColumn1.Width = 57;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn1.DataPropertyName = "RemoteIpAddress";
+            dataGridViewTextBoxColumn1.HeaderText = "RemoteIpAddress";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // connectedDataGridViewCheckBoxColumn
+            // 
+            connectedDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            connectedDataGridViewCheckBoxColumn.DataPropertyName = "Connected";
+            connectedDataGridViewCheckBoxColumn.HeaderText = "Connected";
+            connectedDataGridViewCheckBoxColumn.Name = "connectedDataGridViewCheckBoxColumn";
+            connectedDataGridViewCheckBoxColumn.ReadOnly = true;
+            connectedDataGridViewCheckBoxColumn.Width = 71;
+            // 
+            // apiKeyDataGridViewTextBoxColumn1
+            // 
+            apiKeyDataGridViewTextBoxColumn1.DataPropertyName = "ApiKey";
+            apiKeyDataGridViewTextBoxColumn1.HeaderText = "ApiKey";
+            apiKeyDataGridViewTextBoxColumn1.Name = "apiKeyDataGridViewTextBoxColumn1";
+            apiKeyDataGridViewTextBoxColumn1.ReadOnly = true;
+            apiKeyDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // forwardUrlDataGridViewTextBoxColumn
+            // 
+            forwardUrlDataGridViewTextBoxColumn.DataPropertyName = "ForwardUrl";
+            forwardUrlDataGridViewTextBoxColumn.HeaderText = "ForwardUrl";
+            forwardUrlDataGridViewTextBoxColumn.Name = "forwardUrlDataGridViewTextBoxColumn";
+            forwardUrlDataGridViewTextBoxColumn.ReadOnly = true;
+            forwardUrlDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // isWebSocketDataGridViewCheckBoxColumn
+            // 
+            isWebSocketDataGridViewCheckBoxColumn.DataPropertyName = "IsWebSocket";
+            isWebSocketDataGridViewCheckBoxColumn.HeaderText = "IsWebSocket";
+            isWebSocketDataGridViewCheckBoxColumn.Name = "isWebSocketDataGridViewCheckBoxColumn";
+            isWebSocketDataGridViewCheckBoxColumn.ReadOnly = true;
+            isWebSocketDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // methodDataGridViewTextBoxColumn1
+            // 
+            methodDataGridViewTextBoxColumn1.DataPropertyName = "Method";
+            methodDataGridViewTextBoxColumn1.HeaderText = "Method";
+            methodDataGridViewTextBoxColumn1.Name = "methodDataGridViewTextBoxColumn1";
+            methodDataGridViewTextBoxColumn1.ReadOnly = true;
+            methodDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // queryDataGridViewTextBoxColumn1
+            // 
+            queryDataGridViewTextBoxColumn1.DataPropertyName = "Query";
+            queryDataGridViewTextBoxColumn1.HeaderText = "Query";
+            queryDataGridViewTextBoxColumn1.Name = "queryDataGridViewTextBoxColumn1";
+            queryDataGridViewTextBoxColumn1.ReadOnly = true;
+            queryDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // headersDataGridViewTextBoxColumn1
+            // 
+            headersDataGridViewTextBoxColumn1.DataPropertyName = "Headers";
+            headersDataGridViewTextBoxColumn1.HeaderText = "Headers";
+            headersDataGridViewTextBoxColumn1.Name = "headersDataGridViewTextBoxColumn1";
+            headersDataGridViewTextBoxColumn1.ReadOnly = true;
+            headersDataGridViewTextBoxColumn1.Visible = false;
             // 
             // MainForm
             // 
@@ -319,10 +478,16 @@ namespace chd.Tools.LogServer
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).EndInit();
+            tabPage3.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceSignalRLog).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).EndInit();
             ResumeLayout(false);
         }
 
@@ -335,10 +500,8 @@ namespace chd.Tools.LogServer
         private TabPage tabPage2;
         private BindingSource bindingSourceAppsetting;
         private TextBox textBoxUrl;
-        private NumericUpDown numericUpDownmaxEntries;
         private ComboBox comboBox1;
         private TextBox textBox1;
-        private Label label1;
         private BindingSource bindingSourceLogList;
         private Controls.HttpCallDtoControl httpCallDtoControl1;
         private DataGridView dataGridView1;
@@ -353,5 +516,22 @@ namespace chd.Tools.LogServer
         private DataGridViewTextBoxColumn headersDataGridViewTextBoxColumn;
         private SplitContainer splitContainer1;
         private TextBox textBox2;
+        private Label label1;
+        private TabPage tabPage3;
+        private SplitContainer splitContainer2;
+        private BindingSource bindingSourceSignalRLog;
+        private DataGridView dataGridView2;
+        private Controls.SignalRCallDtoControl signalrCallDtoControl1;
+        private DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dateTimeOffsetDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn hostDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewCheckBoxColumn connectedDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn apiKeyDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn forwardUrlDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn isWebSocketDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn methodDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn queryDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn headersDataGridViewTextBoxColumn1;
     }
 }

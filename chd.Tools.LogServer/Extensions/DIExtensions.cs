@@ -14,6 +14,7 @@ namespace chd.Tools.LogServer.Extensions
 
             services.AddSingleton(settings);
             services.AddSingleton<WebLoggerCache>();
+            services.AddSingleton<SignalRCache>();
 
             services.AddHttpClient();
 

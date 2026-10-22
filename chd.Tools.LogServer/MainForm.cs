@@ -11,19 +11,23 @@ namespace chd.Tools.LogServer
     {
         private readonly AppSettings _appSettings;
         private readonly WebLoggerCache _cache;
+        private readonly SignalRCache _signalRCache;
 
-        public MainForm(AppSettings appSettings, WebLoggerCache cache, IServer server)
+        public MainForm(AppSettings appSettings, WebLoggerCache cache, SignalRCache signalRCache, IServer server)
         {
             _appSettings = appSettings;
             _cache = cache;
             _cache.DataChanged += _cache_DataChanged;
+            _signalRCache = signalRCache;
+            _signalRCache.DataChanged += _signalRCache_DataChanged;
             InitializeComponent();
             this.bindingSourceAppsetting.DataSource = _appSettings;
             var addresses = server.Features.Get<IServerAddressesFeature>();
             this.textBoxUrl.Text = string.Join(",", addresses?.Addresses ?? Enumerable.Empty<string>());
             this.LoadStatusCodes();
             bindingSourceLogList.CurrentChanged += BindingSourceLogList_CurrentChanged;
-            dataGridView1.CellMouseClick += DataGridView1_CellMouseClick; ;
+            bindingSourceSignalRLog.CurrentChanged += BindingSourceSignalRLog_CurrentChanged;
+            dataGridView1.CellMouseClick += DataGridView1_CellMouseClick;
         }
 
         private void DataGridView1_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
@@ -54,6 +58,14 @@ namespace chd.Tools.LogServer
                 httpCallDtoControl1.SetDto(dto);
             }
         }
+        private void BindingSourceSignalRLog_CurrentChanged(object? sender, EventArgs e)
+        {
+            if (sender is BindingSource bs
+                && bs.Current is SignalRConnectionDto dto)
+            {
+                signalrCallDtoControl1.SetDto(dto);
+            }
+        }
 
         private void _cache_DataChanged(object? sender, EventArgs e)
         {
@@ -64,6 +76,17 @@ namespace chd.Tools.LogServer
             else
             {
                 this.bindingSourceLogList.DataSource = _cache.Data;
+            }
+        }
+        private void _signalRCache_DataChanged(object? sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(() => this.bindingSourceSignalRLog.DataSource = _signalRCache.Data);
+            }
+            else
+            {
+                this.bindingSourceSignalRLog.DataSource = _signalRCache.Data;
             }
         }
 
