@@ -28,6 +28,14 @@ namespace chd.Tools.LogServer
             bindingSourceLogList.CurrentChanged += BindingSourceLogList_CurrentChanged;
             bindingSourceSignalRLog.CurrentChanged += BindingSourceSignalRLog_CurrentChanged;
             dataGridView1.CellMouseClick += DataGridView1_CellMouseClick;
+            dataGridView2.CellMouseDoubleClick += DataGridView2_CellMouseDoubleClick;
+        }
+
+        private async void DataGridView2_CellMouseDoubleClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (bindingSourceSignalRLog.Current is SignalRConnectionDto { CanSend: true } dto)
+            {
+            }
         }
 
         private void DataGridView1_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)

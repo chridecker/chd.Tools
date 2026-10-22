@@ -30,7 +30,8 @@ namespace chd.Tools.LogServer.Controls
         {
             if (bindingSourceMessage.Current is SignalRMessage message)
             {
-
+                var form = new SignalRMessageForm(message);
+                form.Show(this);
             }
         }
 

@@ -32,7 +32,7 @@ namespace chd.Tools.LogServer
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
             splitContainer1 = new SplitContainer();
@@ -50,17 +50,6 @@ namespace chd.Tools.LogServer
             tabPage3 = new TabPage();
             splitContainer2 = new SplitContainer();
             dataGridView2 = new DataGridView();
-            bindingSourceSignalRLog = new BindingSource(components);
-            signalrCallDtoControl1 = new chd.Tools.LogServer.Controls.SignalRCallDtoControl();
-            tabPage1 = new TabPage();
-            label1 = new Label();
-            textBox2 = new TextBox();
-            bindingSourceAppsetting = new BindingSource(components);
-            comboBox1 = new ComboBox();
-            textBox1 = new TextBox();
-            textBoxUrl = new TextBox();
-            labelPort = new Label();
-            tabControl2 = new TabControl();
             pathDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dateTimeOffsetDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             hostDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -72,6 +61,18 @@ namespace chd.Tools.LogServer
             methodDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             queryDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             headersDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            bindingSourceSignalRLog = new BindingSource(components);
+            signalrCallDtoControl1 = new chd.Tools.LogServer.Controls.SignalRCallDtoControl();
+            tabPage1 = new TabPage();
+            label1 = new Label();
+            textBox2 = new TextBox();
+            bindingSourceAppsetting = new BindingSource(components);
+            comboBox1 = new ComboBox();
+            textBox1 = new TextBox();
+            textBoxUrl = new TextBox();
+            labelPort = new Label();
+            tabControl2 = new TabControl();
+            checkBoxUseSignalR = new CheckBox();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -158,8 +159,8 @@ namespace chd.Tools.LogServer
             // 
             dateTimeOffsetDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dateTimeOffsetDataGridViewTextBoxColumn.DataPropertyName = "DateTimeOffset";
-            dataGridViewCellStyle1.Format = "HH:mm:ss dd.MM.yyyy";
-            dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm:ss dd.MM.yyyy";
+            dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             dateTimeOffsetDataGridViewTextBoxColumn.HeaderText = "Time";
             dateTimeOffsetDataGridViewTextBoxColumn.Name = "dateTimeOffsetDataGridViewTextBoxColumn";
             dateTimeOffsetDataGridViewTextBoxColumn.ReadOnly = true;
@@ -279,98 +280,6 @@ namespace chd.Tools.LogServer
             dataGridView2.Size = new Size(467, 768);
             dataGridView2.TabIndex = 0;
             // 
-            // bindingSourceSignalRLog
-            // 
-            bindingSourceSignalRLog.DataSource = typeof(SignalRConnectionDto);
-            // 
-            // signalrCallDtoControl1
-            // 
-            signalrCallDtoControl1.Dock = DockStyle.Fill;
-            signalrCallDtoControl1.Location = new Point(0, 0);
-            signalrCallDtoControl1.Name = "signalrCallDtoControl1";
-            signalrCallDtoControl1.Size = new Size(931, 768);
-            signalrCallDtoControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(label1);
-            tabPage1.Controls.Add(textBox2);
-            tabPage1.Controls.Add(comboBox1);
-            tabPage1.Controls.Add(textBox1);
-            tabPage1.Controls.Add(textBoxUrl);
-            tabPage1.Controls.Add(labelPort);
-            tabPage1.Controls.Add(tabControl2);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1408, 774);
-            tabPage1.TabIndex = 1;
-            tabPage1.Text = "Server";
-            tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(366, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(68, 15);
-            label1.TabIndex = 11;
-            label1.Text = "Forward Url";
-            // 
-            // textBox2
-            // 
-            textBox2.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "ForwardUrl", true, DataSourceUpdateMode.OnPropertyChanged));
-            textBox2.Location = new Point(440, 6);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(273, 23);
-            textBox2.TabIndex = 10;
-            // 
-            // bindingSourceAppsetting
-            // 
-            bindingSourceAppsetting.DataSource = typeof(Settings.AppSettings);
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(229, 6);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 9;
-            // 
-            // textBox1
-            // 
-            textBox1.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "Response", true, DataSourceUpdateMode.OnPropertyChanged));
-            textBox1.Location = new Point(8, 35);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(387, 246);
-            textBox1.TabIndex = 8;
-            // 
-            // textBoxUrl
-            // 
-            textBoxUrl.Location = new Point(36, 6);
-            textBoxUrl.Name = "textBoxUrl";
-            textBoxUrl.ReadOnly = true;
-            textBoxUrl.Size = new Size(187, 23);
-            textBoxUrl.TabIndex = 4;
-            // 
-            // labelPort
-            // 
-            labelPort.AutoSize = true;
-            labelPort.Location = new Point(8, 11);
-            labelPort.Name = "labelPort";
-            labelPort.Size = new Size(22, 15);
-            labelPort.TabIndex = 2;
-            labelPort.Text = "Url";
-            // 
-            // tabControl2
-            // 
-            tabControl2.Location = new Point(942, 569);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(8, 8);
-            tabControl2.TabIndex = 0;
-            // 
             // pathDataGridViewTextBoxColumn1
             // 
             pathDataGridViewTextBoxColumn1.DataPropertyName = "Path";
@@ -462,6 +371,110 @@ namespace chd.Tools.LogServer
             headersDataGridViewTextBoxColumn1.ReadOnly = true;
             headersDataGridViewTextBoxColumn1.Visible = false;
             // 
+            // bindingSourceSignalRLog
+            // 
+            bindingSourceSignalRLog.DataSource = typeof(SignalRConnectionDto);
+            // 
+            // signalrCallDtoControl1
+            // 
+            signalrCallDtoControl1.Dock = DockStyle.Fill;
+            signalrCallDtoControl1.Location = new Point(0, 0);
+            signalrCallDtoControl1.Name = "signalrCallDtoControl1";
+            signalrCallDtoControl1.Size = new Size(931, 768);
+            signalrCallDtoControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(checkBoxUseSignalR);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(textBox2);
+            tabPage1.Controls.Add(comboBox1);
+            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(textBoxUrl);
+            tabPage1.Controls.Add(labelPort);
+            tabPage1.Controls.Add(tabControl2);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1408, 774);
+            tabPage1.TabIndex = 1;
+            tabPage1.Text = "Server";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(366, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 15);
+            label1.TabIndex = 11;
+            label1.Text = "Forward Url";
+            // 
+            // textBox2
+            // 
+            textBox2.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "ForwardUrl", true));
+            textBox2.Location = new Point(440, 6);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(273, 23);
+            textBox2.TabIndex = 10;
+            // 
+            // bindingSourceAppsetting
+            // 
+            bindingSourceAppsetting.DataSource = typeof(Settings.AppSettings);
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(229, 6);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 9;
+            // 
+            // textBox1
+            // 
+            textBox1.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "Response", true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox1.Location = new Point(8, 35);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(387, 246);
+            textBox1.TabIndex = 8;
+            // 
+            // textBoxUrl
+            // 
+            textBoxUrl.Location = new Point(36, 6);
+            textBoxUrl.Name = "textBoxUrl";
+            textBoxUrl.ReadOnly = true;
+            textBoxUrl.Size = new Size(187, 23);
+            textBoxUrl.TabIndex = 4;
+            // 
+            // labelPort
+            // 
+            labelPort.AutoSize = true;
+            labelPort.Location = new Point(8, 11);
+            labelPort.Name = "labelPort";
+            labelPort.Size = new Size(22, 15);
+            labelPort.TabIndex = 2;
+            labelPort.Text = "Url";
+            // 
+            // tabControl2
+            // 
+            tabControl2.Location = new Point(942, 569);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new Size(8, 8);
+            tabControl2.TabIndex = 0;
+            // 
+            // checkBoxUseSignalR
+            // 
+            checkBoxUseSignalR.AutoSize = true;
+            checkBoxUseSignalR.DataBindings.Add(new Binding("Checked", bindingSourceAppsetting, "UseSignalR", true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBoxUseSignalR.Location = new Point(440, 35);
+            checkBoxUseSignalR.Name = "checkBoxUseSignalR";
+            checkBoxUseSignalR.Size = new Size(87, 19);
+            checkBoxUseSignalR.TabIndex = 12;
+            checkBoxUseSignalR.Text = "Use SignalR";
+            checkBoxUseSignalR.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -533,5 +546,6 @@ namespace chd.Tools.LogServer
         private DataGridViewTextBoxColumn methodDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn queryDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn headersDataGridViewTextBoxColumn1;
+        private CheckBox checkBoxUseSignalR;
     }
 }

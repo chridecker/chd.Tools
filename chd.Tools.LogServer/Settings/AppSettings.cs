@@ -6,6 +6,7 @@ namespace chd.Tools.LogServer.Settings
     {
         public HttpStatusCode ResponseStatusCode { get; set; } = HttpStatusCode.OK;
         public string Response { get; set; } = string.Empty;
-        public string ForwardUrl { get; set; } = "http://localhost:8082";
+        public string ForwardUrl { get; set; }
+        public bool UseSignalR{ get; set; }
     }
 }

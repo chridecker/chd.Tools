@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Drawing.Text;
 using System.Net.WebSockets;
 using System.Text.Json;
-using static chd.Tools.LogServer.Model.SignalRMessage;
 
 namespace chd.Tools.LogServer.Model
 {

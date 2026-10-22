@@ -5,8 +5,6 @@ using chd.Tools.LogServer.Settings;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using System.Net.WebSockets;
 using System.Text;
-using static chd.Tools.LogServer.Model.SignalRMessage;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace chd.Tools.LogServer.Middleware
 {
@@ -14,11 +12,12 @@ namespace chd.Tools.LogServer.Middleware
     {
         public async Task InvokeAsync(HttpContext context, AppSettings settings, SignalRCache cache)
         {
-            if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
+             if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && context.WebSockets.IsWebSocketRequest)
             {
                 var dto = new SignalRConnectionDto();
                 await dto.Initialize(context);
+                dto.ForwardUrl = settings.ForwardUrl;
 
                 var http = new Uri(
                     $"{settings.ForwardUrl.TrimEnd('/')}{context.Request.Path}{context.Request.QueryString}");
@@ -92,9 +91,10 @@ namespace chd.Tools.LogServer.Middleware
                 {
                 }
                 dto.Connected = false;
-
                 return;
             }
+
+            await next(context);
         }
         static async Task Pump(WebSocket from, WebSocket to, SignalRConnectionDto dto, string direction, CancellationToken ct)
         {

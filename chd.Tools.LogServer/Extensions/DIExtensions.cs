@@ -27,6 +27,7 @@ namespace chd.Tools.LogServer.Extensions
             app.UseMiddleware<WebLogger>();
             app.UseMiddleware<HttpForward>();
             app.UseMiddleware<SignalRForward>();
+            app.UseMiddleware<SignalRSelf>();
             return app;
         }
     }

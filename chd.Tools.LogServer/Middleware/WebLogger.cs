@@ -14,14 +14,16 @@ namespace chd.Tools.LogServer.Middleware
         {
             var dto = new HttpCallDto();
             await dto.Initialize(context);
-            if (string.IsNullOrWhiteSpace(settings.ForwardUrl))
+            if (string.IsNullOrWhiteSpace(settings.ForwardUrl)
+                && !context.WebSockets.IsWebSocketRequest
+                && !IsSignalRRequest(context, settings))
             {
                 context.Response.StatusCode = (int)settings.ResponseStatusCode;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(settings.Response);
+                await context.Response.WriteAsync(settings.Response, context.RequestAborted);
                 dto.ResponseStatusCode = settings.ResponseStatusCode;
                 dto.ResponseBody = settings.Response;
-
+                cache.Add(dto);
                 return;
             }
 
@@ -34,5 +36,11 @@ namespace chd.Tools.LogServer.Middleware
             dto.ResponseBody = callLogger.CallResponse;
             cache.UpdateData();
         }
+
+        private bool IsSignalRRequest(HttpContext context, AppSettings settings)
+            => settings.UseSignalR
+                 && context.Request is { Method: "POST", Path.HasValue: true } 
+                 && context.Request.Path.Value.EndsWith("negotiate");
+
     }
 }
