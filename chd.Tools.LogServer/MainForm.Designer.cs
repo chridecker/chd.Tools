@@ -32,9 +32,10 @@ namespace chd.Tools.LogServer
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
+            splitContainer1 = new SplitContainer();
             dataGridView1 = new DataGridView();
             dateTimeOffsetDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             hostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -55,18 +56,18 @@ namespace chd.Tools.LogServer
             textBoxUrl = new TextBox();
             labelPort = new Label();
             tabControl2 = new TabControl();
-            splitContainer1 = new SplitContainer();
+            textBox2 = new TextBox();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -90,6 +91,23 @@ namespace chd.Tools.LogServer
             tabPage2.TabIndex = 0;
             tabPage2.Text = "Log";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(3, 3);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(dataGridView1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(httpCallDtoControl1);
+            splitContainer1.Size = new Size(1402, 768);
+            splitContainer1.SplitterDistance = 467;
+            splitContainer1.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -118,8 +136,8 @@ namespace chd.Tools.LogServer
             // 
             dateTimeOffsetDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dateTimeOffsetDataGridViewTextBoxColumn.DataPropertyName = "DateTimeOffset";
-            dataGridViewCellStyle3.Format = "HH:mm:ss dd.MM.yyyy";
-            dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "HH:mm:ss dd.MM.yyyy";
+            dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             dateTimeOffsetDataGridViewTextBoxColumn.HeaderText = "Time";
             dateTimeOffsetDataGridViewTextBoxColumn.Name = "dateTimeOffsetDataGridViewTextBoxColumn";
             dateTimeOffsetDataGridViewTextBoxColumn.ReadOnly = true;
@@ -198,6 +216,7 @@ namespace chd.Tools.LogServer
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(textBox2);
             tabPage1.Controls.Add(comboBox1);
             tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(label1);
@@ -223,7 +242,7 @@ namespace chd.Tools.LogServer
             // 
             // textBox1
             // 
-            textBox1.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "Response", true));
+            textBox1.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "Response", true, DataSourceUpdateMode.OnPropertyChanged));
             textBox1.Location = new Point(8, 35);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
@@ -245,7 +264,7 @@ namespace chd.Tools.LogServer
             // 
             // numericUpDownmaxEntries
             // 
-            numericUpDownmaxEntries.DataBindings.Add(new Binding("Value", bindingSourceAppsetting, "MaxEntries", true));
+            numericUpDownmaxEntries.DataBindings.Add(new Binding("Value", bindingSourceAppsetting, "MaxEntries", true, DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
             numericUpDownmaxEntries.Location = new Point(287, 6);
             numericUpDownmaxEntries.Name = "numericUpDownmaxEntries";
             numericUpDownmaxEntries.Size = new Size(57, 23);
@@ -276,22 +295,13 @@ namespace chd.Tools.LogServer
             tabControl2.Size = new Size(8, 8);
             tabControl2.TabIndex = 0;
             // 
-            // splitContainer1
+            // textBox2
             // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(3, 3);
-            splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(dataGridView1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(httpCallDtoControl1);
-            splitContainer1.Size = new Size(1402, 768);
-            splitContainer1.SplitterDistance = 467;
-            splitContainer1.TabIndex = 3;
+            textBox2.DataBindings.Add(new Binding("Text", bindingSourceAppsetting, "ForwardUrl", true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox2.Location = new Point(545, 5);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(273, 23);
+            textBox2.TabIndex = 10;
             // 
             // MainForm
             // 
@@ -303,16 +313,16 @@ namespace chd.Tools.LogServer
             Text = "chd Log Server";
             tabControl1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceLogList).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAppsetting).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownmaxEntries).EndInit();
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -342,5 +352,6 @@ namespace chd.Tools.LogServer
         private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn headersDataGridViewTextBoxColumn;
         private SplitContainer splitContainer1;
+        private TextBox textBox2;
     }
 }

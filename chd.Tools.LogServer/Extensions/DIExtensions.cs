@@ -10,14 +10,19 @@ namespace chd.Tools.LogServer.Extensions
 
         public static IServiceCollection AddTools(this IServiceCollection services, AppSettings settings)
         {
+            services.AddScoped<CallLogger>();
+
             services.AddSingleton(settings);
             services.AddSingleton<WebLoggerCache>();
+
+            services.AddHttpClient();
 
             return services;
         }
         public static IApplicationBuilder AddWebLogger(this IApplicationBuilder app)
         {
             app.UseMiddleware<WebLogger>();
+            app.UseMiddleware<HttpForward>();
             return app;
         }
     }

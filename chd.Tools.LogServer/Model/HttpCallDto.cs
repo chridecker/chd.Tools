@@ -18,7 +18,9 @@ namespace chd.Tools.LogServer.Model
         public string Username { get; set; }
         public string Password { get; set; }
         public HttpStatusCode ResponseStatusCode { get; set; }
+        public string ResponseStatusCodeText => $"{(int)ResponseStatusCode} - {ResponseStatusCode}";
         public string ResponseBody { get; set; }
+        public string ForwardUrl { get; set; }
 
         public Dictionary<string, string> Headers { get; } = [];
 

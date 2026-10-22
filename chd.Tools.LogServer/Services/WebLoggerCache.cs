@@ -20,6 +20,8 @@ namespace chd.Tools.LogServer.Services
             NotifyData();
         }
 
+        public void UpdateData() => NotifyData();
+
         public List<HttpCallDto> Data => _data.OrderByDescending(o => o.DateTimeOffset).ToList();
 
         public void Clear()

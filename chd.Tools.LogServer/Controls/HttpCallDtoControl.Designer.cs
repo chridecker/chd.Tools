@@ -263,7 +263,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             // txtResponseStatusCode
             // 
-            txtResponseStatusCode.DataBindings.Add(new Binding("Text", bindingSourceDto, "ResponseStatusCode", true));
+            txtResponseStatusCode.DataBindings.Add(new Binding("Text", bindingSourceDto, "ResponseStatusCodeText", true));
             txtResponseStatusCode.Location = new Point(148, 128);
             txtResponseStatusCode.Name = "txtResponseStatusCode";
             txtResponseStatusCode.Size = new Size(100, 23);
