@@ -26,6 +26,7 @@ namespace chd.Tools.LogServer.Middleware
             }
 
             dto.ForwardUrl = settings.ForwardUrl;
+            dto.IsWebSocket = context.WebSockets.IsWebSocketRequest;
             cache.Add(dto);
 
             await next(context);

@@ -1,5 +1,6 @@
 ﻿using chd.Tools.LogServer.Services;
 using chd.Tools.LogServer.Settings;
+using System.Net.WebSockets;
 
 namespace chd.Tools.LogServer.Middleware
 {
@@ -7,10 +8,11 @@ namespace chd.Tools.LogServer.Middleware
     {
         public async Task InvokeAsync(HttpContext context, AppSettings settings, IHttpClientFactory httpClientFactory, CallLogger callLogger)
         {
-            if (!string.IsNullOrWhiteSpace(settings.ForwardUrl))
+            if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
+                && !context.WebSockets.IsWebSocketRequest)
             {
                 var client = httpClientFactory.CreateClient();
-                var targetUri = new Uri($"{settings.ForwardUrl}{context.Request.Path}{context.Request.QueryString}");
+                var targetUri = new Uri($"{settings.ForwardUrl.TrimEnd('/')}{context.Request.Path}{context.Request.QueryString}");
 
                 using var requestMessage = new HttpRequestMessage(new HttpMethod(context.Request.Method), targetUri);
 
@@ -69,5 +71,6 @@ namespace chd.Tools.LogServer.Middleware
 
             await next(context);
         }
+       
     }
 }

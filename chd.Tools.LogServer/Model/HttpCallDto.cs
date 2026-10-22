@@ -21,6 +21,7 @@ namespace chd.Tools.LogServer.Model
         public string ResponseStatusCodeText => $"{(int)ResponseStatusCode} - {ResponseStatusCode}";
         public string ResponseBody { get; set; }
         public string ForwardUrl { get; set; }
+        public bool IsWebSocket{ get; set; }
 
         public Dictionary<string, string> Headers { get; } = [];
 

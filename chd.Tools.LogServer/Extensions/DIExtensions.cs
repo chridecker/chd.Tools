@@ -21,8 +21,11 @@ namespace chd.Tools.LogServer.Extensions
         }
         public static IApplicationBuilder AddWebLogger(this IApplicationBuilder app)
         {
+            app.UseWebSockets();
+
             app.UseMiddleware<WebLogger>();
             app.UseMiddleware<HttpForward>();
+            app.UseMiddleware<SignalRForward>();
             return app;
         }
     }
