@@ -2,7 +2,7 @@
   "profiles": {
     "chd.Tools.LogServer": {
       "commandName": "Project",
-      "commandLineArgs": "8081",
+      "commandLineArgs": "8082",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
