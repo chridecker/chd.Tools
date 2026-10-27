@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using System.Text;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace chd.Tools.LogServer.Model
 {

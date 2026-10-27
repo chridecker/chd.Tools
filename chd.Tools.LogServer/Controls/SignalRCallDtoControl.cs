@@ -12,6 +12,7 @@ namespace chd.Tools.LogServer.Controls
 {
     public partial class SignalRCallDtoControl : UserControl
     {
+        private SignalRConnectionDto _dto => bindingSourceDto.Current as SignalRConnectionDto;
         public SignalRCallDtoControl()
         {
             InitializeComponent();
@@ -26,10 +27,18 @@ namespace chd.Tools.LogServer.Controls
             dgvMessages.CellContentDoubleClick += DgvMessages_CellContentDoubleClick;
         }
 
-        private void DgvMessages_CellContentDoubleClick(object? sender, DataGridViewCellEventArgs e)
+        private async void DgvMessages_CellContentDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             if (bindingSourceMessage.Current is SignalRMessage message)
             {
+                if (message is SignalRStreamInvokationMessage stream)
+                {
+                    await this._dto.SendStreamItem(stream.InvocationId, 1, CancellationToken.None);
+                }
+                else if (message is SignalRStreamItemMessage item)
+                {
+                    await this._dto.SendCompletionItem(item.InvocationId, CancellationToken.None);
+                }
                 var form = new SignalRMessageForm(message);
                 form.Show(this);
             }
@@ -37,6 +46,7 @@ namespace chd.Tools.LogServer.Controls
 
         public void SetDto(SignalRConnectionDto dto)
         {
+            dto.MessageReceived += Dto_MessageReceived;
             this.bindingSourceDto.DataSource = dto;
             dgvHeaders.DataSource = dto.Headers
                 .Select(h => new
@@ -45,6 +55,19 @@ namespace chd.Tools.LogServer.Controls
                     Value = h.Value
                 })
                 .ToList();
+        }
+
+        private void Dto_MessageReceived(object? sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(() => bindingSourceDto.ResetBindings(true));
+            }
+            else
+            {
+                bindingSourceDto.ResetBindings(true);
+
+            }
         }
     }
 }

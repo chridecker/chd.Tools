@@ -28,6 +28,29 @@ namespace chd.Tools.LogServer.Extensions
             }
             return string.Empty;
         }
+        public static object RootObjectValue(this string json, string name)
+        {
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+            if (root.ValueKind != JsonValueKind.Object)
+            {
+                return string.Empty;
+            }
+
+            if (root.TryGetProperty(name, out var typeProp))
+            {
+                return typeProp.ValueKind switch
+                {
+                    JsonValueKind.False => typeProp.GetBoolean(),
+                    JsonValueKind.True => typeProp.GetBoolean(),
+                    JsonValueKind.Number => typeProp.GetInt32(),
+                    JsonValueKind.String => typeProp.GetString(),
+                    JsonValueKind.Object => typeProp.GetRawText(),
+
+                };
+            }
+            return string.Empty;
+        }
         public static string[] RootValueArray(this string json, string name)
         {
             using var doc = JsonDocument.Parse(json);
@@ -37,7 +60,7 @@ namespace chd.Tools.LogServer.Extensions
                 return [];
             }
 
-            if (root.TryGetProperty("arguments", out var args) && args.ValueKind == JsonValueKind.Array)
+            if (root.TryGetProperty(name, out var args) && args.ValueKind == JsonValueKind.Array)
             {
                 var lst = new List<string>();
                 foreach (var item in args.EnumerateArray())
@@ -47,7 +70,7 @@ namespace chd.Tools.LogServer.Extensions
 
                 return lst.ToArray();
             }
-            return [];
+            return null;
         }
 
         private static SignalRMessageType GetMessageType(string json)

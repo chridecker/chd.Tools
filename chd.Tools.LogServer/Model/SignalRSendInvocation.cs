@@ -1,10 +1,10 @@
 ﻿namespace chd.Tools.LogServer.Model
 {
-    public class SignalRSendInvocation
+    public class SignalRSendInvocation(object[] arguments, string target) : SignalRSendItem(SignalRMessageType.Invocation)
     {
-        public int Type { get; set; } = 1;
-        public string Target { get; set; }
-        public List<object> Arguments { get; set; } = [];
+        public object[] Arguments => arguments;
+        public string Target => target;
+
 
     }
 }

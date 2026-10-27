@@ -9,6 +9,8 @@ namespace chd.Tools.LogServer.Model
         private List<SignalRMessage> _messages = [];
         private WebSocket? _client;
 
+        public event EventHandler MessageReceived;
+
         public bool Connected { get; set; }
         public bool CanSend => _client is not null && _client.State is WebSocketState.Open;
 
@@ -25,28 +27,52 @@ namespace chd.Tools.LogServer.Model
         public void AddMessage(SignalRMessage message)
         {
             _messages.Add(message);
+            MessageReceived?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetClient(WebSocket client) => _client = client;
 
+        public async Task SendStreamItem(string invocationId, object item, CancellationToken ct)
+        {
+            var data = new SignalRSendStreamItem(invocationId, item);
+            var log = new SignalRStreamItemMessage(item, invocationId);
+            await Send(data, log, ct);
+        }
+        public async Task SendCompletionItem(string invocationId, CancellationToken ct)
+        {
+            var data = new SignalRSendCompletion(invocationId);
+            var log = new SignalRCompletionMessage( invocationId);
+            await Send(data, log, ct);
+        }
+
+
         public async Task SendMessage(string method, object[] arguments, CancellationToken ct)
         {
-            if (!CanSend) { return; }
+            var data = new SignalRSendInvocation(arguments, method);
+            var log = new SignalRInvocationMessage(method, arguments.Select(s => JsonSerializer.Serialize(s, JsonSerializerOptions.Web)).ToArray());
+            await Send(data, log, ct);
+        }
 
-            var data = new SignalRSendInvocation()
-            {
-                Target = method
-            };
-            data.Arguments.AddRange(arguments);
+        public async Task SendClose(CancellationToken ct)
+        {
+            var data = new SignalRSendClose();
+            var log = new SignalRCloseMessage();
+            await Send(data, log, ct);
+        }
+
+        private async Task Send<T>(T data, SignalRMessage log, CancellationToken ct)
+            where T : SignalRSendItem
+        {
+            if (!CanSend) { return; }
             var json = JsonSerializer.Serialize(data, JsonSerializerOptions.Web);
             json += "\u001e";
             using var ms = new MemoryStream(Encoding.Default.GetBytes(json));
             await _client.SendAsync(ms.ToArray(), WebSocketMessageType.Text, WebSocketMessageFlags.EndOfMessage, ct);
-            var dto = new SignalRInvocationMessage(method, arguments.Select(s => JsonSerializer.Serialize(s, JsonSerializerOptions.Web)).ToArray());
-            dto.Data = json;
-            dto.Direction = "Send";
-            dto.Type = WebSocketMessageType.Text;
-            this.AddMessage(dto);
+            log.Data = json;
+            log.Direction = "Send";
+            log.Type = WebSocketMessageType.Text;
+            this.AddMessage(log);
         }
+
     }
 }

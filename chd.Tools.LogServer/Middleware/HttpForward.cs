@@ -71,6 +71,6 @@ namespace chd.Tools.LogServer.Middleware
 
             await next(context);
         }
-       
+
     }
 }

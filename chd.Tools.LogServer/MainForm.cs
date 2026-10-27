@@ -31,6 +31,16 @@ namespace chd.Tools.LogServer
             dataGridView2.CellMouseDoubleClick += DataGridView2_CellMouseDoubleClick;
         }
 
+        protected override async void OnFormClosing(FormClosingEventArgs e)
+        {
+            foreach (var dto in _signalRCache.Data.Where(x => x.Connected))
+            {
+                await dto.SendClose(CancellationToken.None);
+            }
+
+            base.OnFormClosing(e);
+        }
+
         private async void DataGridView2_CellMouseDoubleClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
             if (bindingSourceSignalRLog.Current is SignalRConnectionDto { CanSend: true } dto)
