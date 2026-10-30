@@ -20,10 +20,15 @@ namespace chd.Tools.LogServer.Model
         public virtual async Task Initialize(HttpContext context)
         {
             RemoteIpAddress = context.Connection.RemoteIpAddress;
+
             if (RemoteIpAddress is not null)
             {
-                var hostEntry = await Dns.GetHostEntryAsync(RemoteIpAddress);
-                Host = hostEntry.HostName;
+                try
+                {
+                    var hostEntry = await Dns.GetHostEntryAsync(RemoteIpAddress);
+                    Host = hostEntry.HostName;
+                }
+                catch { }
             }
             ApiKey = context.Request.Headers.TryGetValue("x-api-key", out var key) ? key.ToString() : string.Empty;
             Method = context.Request.Method;
