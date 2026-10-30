@@ -20,6 +20,7 @@ namespace chd.Tools.LogServer.Model
         public virtual async Task Initialize(HttpContext context)
         {
             RemoteIpAddress = context.Connection.RemoteIpAddress;
+
             if (RemoteIpAddress is not null)
             {
                 var hostEntry = Dns.GetHostEntryAsync(RemoteIpAddress);
