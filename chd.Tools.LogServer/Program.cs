@@ -10,9 +10,16 @@ var setting = new AppSettings();
 
 var builder = WebApplication.CreateBuilder(args);
 
-if (args.Any() && int.TryParse(args[0], out var port))
+if (args.Length == 1 && int.TryParse(args[0], out var port))
 {
     builder.WebHost.UseUrls($"http://*:{port}");
+}
+else if (args.All(a => int.TryParse(a, out _)))
+{
+    foreach (var p in args.Select(a => int.TryParse(a, out int p)))
+    {
+        builder.WebHost.UseUrls($"http://*:{p}");
+    }
 }
 else if (args.Any())
 {

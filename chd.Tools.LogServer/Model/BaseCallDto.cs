@@ -23,10 +23,13 @@ namespace chd.Tools.LogServer.Model
 
             if (RemoteIpAddress is not null)
             {
-                var hostEntry = Dns.GetHostEntryAsync(RemoteIpAddress);
-                await Task.WhenAny(hostEntry, Task.Delay(50));
+                try
+                {
+                    var hostEntry = Dns.GetHostEntryAsync(RemoteIpAddress);
+                    await Task.WhenAny(hostEntry, Task.Delay(50));
 
-                Host = hostEntry.IsCompletedSuccessfully ? hostEntry.Result.HostName : "Not resolved";
+                    Host = hostEntry.IsCompletedSuccessfully ? hostEntry.Result.HostName : "Not resolved";
+                }catch{}
             }
             ApiKey = context.Request.Headers.TryGetValue("x-api-key", out var key) ? key.ToString() : string.Empty;
             Method = context.Request.Method;
