@@ -1,8 +1,7 @@
 {
   "profiles": {
     "chd.Tools.LogServer": {
-      "commandName": "Project",
-      "commandLineArgs": "5604"
+      "commandName": "Project"
     }
   }
 }
