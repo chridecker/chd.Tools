@@ -18,6 +18,7 @@ namespace chd.Tools.LogServer.Modules
         protected override void ConfigureModuleServices(IServiceCollection services, IServiceProvider appServices)
         {
             services.AddScoped<CallLogger>();
+            services.CopySingletonFromContainer<AppSettings>(appServices);
             services.CopySingletonFromContainer<WebLoggerCache>(appServices);
             services.CopySingletonFromContainer<SignalRCache>(appServices);
 
