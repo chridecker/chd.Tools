@@ -8,12 +8,8 @@ using Microsoft.Extensions.Options;
 
 namespace chd.Tools.LogServer.Modules
 {
-    public class LogModule(IOptionsMonitor<WebModuleSettings> optionsMonitor) : BaseWebModule(optionsMonitor)
+    public class LogModule(IOptionsMonitor<WebModuleSettings> optionsMonitor, SignalRCache signalRCache) : BaseWebModule(optionsMonitor)
     {
-        protected override void ConfigureModule(IHost app)
-        {
-        }
-
         protected override void ConfigureModuleLogging(ILoggingBuilder logging, IServiceProvider appServices)
         {
 
@@ -31,6 +27,13 @@ namespace chd.Tools.LogServer.Modules
         protected override void ConfigureWebModule(WebApplication app)
         {
             app.AddWebLogger();
+        }
+        public override async Task StopModuleAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var dto in signalRCache.Data.Where(x => x.Connected))
+            {
+                await dto.SendClose(CancellationToken.None);
+            }
         }
     }
 }
