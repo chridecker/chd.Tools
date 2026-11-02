@@ -110,7 +110,7 @@ namespace chd.Tools.LogServer.Controls
             this.tableLayoutPanel.RowStyles.Add(new RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new RowStyle());
-            this.tableLayoutPanel.Size = new Size(900, 381);
+            this.tableLayoutPanel.Size = new Size(900, 363);
             this.tableLayoutPanel.TabIndex = 2;
             // 
             // lblTime
@@ -123,7 +123,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             // lblMethod
             // 
-            this.lblMethod.Location = new Point(8, 87);
+            this.lblMethod.Location = new Point(8, 81);
             this.lblMethod.Name = "lblMethod";
             this.lblMethod.Size = new Size(100, 38);
             this.lblMethod.TabIndex = 2;
@@ -132,14 +132,14 @@ namespace chd.Tools.LogServer.Controls
             // txtMethod
             // 
             this.txtMethod.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Method", true));
-            this.txtMethod.Location = new Point(168, 90);
+            this.txtMethod.Location = new Point(168, 84);
             this.txtMethod.Name = "txtMethod";
-            this.txtMethod.Size = new Size(100, 35);
+            this.txtMethod.Size = new Size(100, 23);
             this.txtMethod.TabIndex = 3;
             // 
             // lblPath
             // 
-            this.lblPath.Location = new Point(8, 128);
+            this.lblPath.Location = new Point(8, 119);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new Size(134, 38);
             this.lblPath.TabIndex = 4;
@@ -148,14 +148,14 @@ namespace chd.Tools.LogServer.Controls
             // txtPath
             // 
             this.txtPath.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Path", true));
-            this.txtPath.Location = new Point(168, 131);
+            this.txtPath.Location = new Point(168, 122);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new Size(100, 35);
+            this.txtPath.Size = new Size(100, 23);
             this.txtPath.TabIndex = 5;
             // 
             // lblApiKey
             // 
-            this.lblApiKey.Location = new Point(8, 210);
+            this.lblApiKey.Location = new Point(8, 195);
             this.lblApiKey.Name = "lblApiKey";
             this.lblApiKey.Size = new Size(100, 38);
             this.lblApiKey.TabIndex = 8;
@@ -164,14 +164,14 @@ namespace chd.Tools.LogServer.Controls
             // txtApiKey
             // 
             this.txtApiKey.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "ApiKey", true));
-            this.txtApiKey.Location = new Point(168, 213);
+            this.txtApiKey.Location = new Point(168, 198);
             this.txtApiKey.Name = "txtApiKey";
-            this.txtApiKey.Size = new Size(100, 35);
+            this.txtApiKey.Size = new Size(100, 23);
             this.txtApiKey.TabIndex = 9;
             // 
             // lblUsername
             // 
-            this.lblUsername.Location = new Point(8, 251);
+            this.lblUsername.Location = new Point(8, 233);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new Size(100, 41);
             this.lblUsername.TabIndex = 8;
@@ -180,14 +180,14 @@ namespace chd.Tools.LogServer.Controls
             // txtUsername
             // 
             this.txtUsername.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Username", true));
-            this.txtUsername.Location = new Point(168, 254);
+            this.txtUsername.Location = new Point(168, 236);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new Size(100, 35);
+            this.txtUsername.Size = new Size(100, 23);
             this.txtUsername.TabIndex = 9;
             // 
             // lblPassword
             // 
-            this.lblPassword.Location = new Point(8, 292);
+            this.lblPassword.Location = new Point(8, 274);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new Size(143, 41);
             this.lblPassword.TabIndex = 8;
@@ -196,30 +196,30 @@ namespace chd.Tools.LogServer.Controls
             // txtPassword
             // 
             this.txtPassword.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Password", true));
-            this.txtPassword.Location = new Point(168, 295);
+            this.txtPassword.Location = new Point(168, 277);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new Size(100, 35);
+            this.txtPassword.Size = new Size(100, 23);
             this.txtPassword.TabIndex = 9;
             // 
             // txtForwardUrl
             // 
             this.txtForwardUrl.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "ForwardUrl", true));
-            this.txtForwardUrl.Location = new Point(168, 336);
+            this.txtForwardUrl.Location = new Point(168, 318);
             this.txtForwardUrl.Name = "txtForwardUrl";
-            this.txtForwardUrl.Size = new Size(100, 35);
+            this.txtForwardUrl.Size = new Size(100, 23);
             this.txtForwardUrl.TabIndex = 11;
             // 
             // txtRemoteIp
             // 
             this.txtRemoteIp.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "RemoteIpAddress", true));
-            this.txtRemoteIp.Location = new Point(168, 49);
+            this.txtRemoteIp.Location = new Point(168, 46);
             this.txtRemoteIp.Name = "txtRemoteIp";
-            this.txtRemoteIp.Size = new Size(100, 35);
+            this.txtRemoteIp.Size = new Size(100, 23);
             this.txtRemoteIp.TabIndex = 13;
             // 
             // lblResponseStatusCode
             // 
-            this.lblResponseStatusCode.Location = new Point(8, 169);
+            this.lblResponseStatusCode.Location = new Point(8, 157);
             this.lblResponseStatusCode.Name = "lblResponseStatusCode";
             this.lblResponseStatusCode.Size = new Size(154, 38);
             this.lblResponseStatusCode.TabIndex = 12;
@@ -227,7 +227,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             // lblForwardUrl
             // 
-            this.lblForwardUrl.Location = new Point(8, 333);
+            this.lblForwardUrl.Location = new Point(8, 315);
             this.lblForwardUrl.Name = "lblForwardUrl";
             this.lblForwardUrl.Size = new Size(143, 38);
             this.lblForwardUrl.TabIndex = 12;
@@ -236,9 +236,9 @@ namespace chd.Tools.LogServer.Controls
             // txtResponseStatusCode
             // 
             this.txtResponseStatusCode.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "ResponseStatusCodeText", true));
-            this.txtResponseStatusCode.Location = new Point(168, 172);
+            this.txtResponseStatusCode.Location = new Point(168, 160);
             this.txtResponseStatusCode.Name = "txtResponseStatusCode";
-            this.txtResponseStatusCode.Size = new Size(100, 35);
+            this.txtResponseStatusCode.Size = new Size(100, 23);
             this.txtResponseStatusCode.TabIndex = 5;
             // 
             // txtTime
@@ -246,20 +246,20 @@ namespace chd.Tools.LogServer.Controls
             this.txtTime.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "DateTimeOffset", true, DataSourceUpdateMode.Never, "HH:mm:ss,fff dd.MM.yyyy", "HH:mm:ss,fff dd.MM.yyyy"));
             this.txtTime.Location = new Point(168, 8);
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new Size(100, 35);
+            this.txtTime.Size = new Size(100, 23);
             this.txtTime.TabIndex = 1;
             // 
             // txtHost
             // 
             this.txtHost.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Host", true));
-            this.txtHost.Location = new Point(533, 49);
+            this.txtHost.Location = new Point(533, 46);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new Size(100, 35);
+            this.txtHost.Size = new Size(100, 23);
             this.txtHost.TabIndex = 11;
             // 
             // lblHost
             // 
-            this.lblHost.Location = new Point(8, 46);
+            this.lblHost.Location = new Point(8, 43);
             this.lblHost.Name = "lblHost";
             this.lblHost.Size = new Size(100, 38);
             this.lblHost.TabIndex = 10;
@@ -268,16 +268,16 @@ namespace chd.Tools.LogServer.Controls
             // txtQuery
             // 
             this.txtQuery.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Query", true));
-            this.txtQuery.Location = new Point(533, 131);
+            this.txtQuery.Location = new Point(533, 122);
             this.txtQuery.Name = "txtQuery";
-            this.txtQuery.Size = new Size(100, 35);
+            this.txtQuery.Size = new Size(100, 23);
             this.txtQuery.TabIndex = 7;
             // 
             // cbIsWebSocket
             // 
             this.cbIsWebSocket.DataBindings.Add(new Binding("Checked", this.bindingSourceDto, "IsWebSocket", true));
             this.cbIsWebSocket.Enabled = false;
-            this.cbIsWebSocket.Location = new Point(533, 336);
+            this.cbIsWebSocket.Location = new Point(533, 318);
             this.cbIsWebSocket.Name = "cbIsWebSocket";
             this.cbIsWebSocket.Size = new Size(200, 37);
             this.cbIsWebSocket.TabIndex = 11;
@@ -287,7 +287,7 @@ namespace chd.Tools.LogServer.Controls
             // 
             this.grpBody.Controls.Add(this.txtBody);
             this.grpBody.Dock = DockStyle.Top;
-            this.grpBody.Location = new Point(0, 561);
+            this.grpBody.Location = new Point(0, 543);
             this.grpBody.Name = "grpBody";
             this.grpBody.Size = new Size(900, 180);
             this.grpBody.TabIndex = 1;
@@ -299,19 +299,19 @@ namespace chd.Tools.LogServer.Controls
             this.txtBody.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "ResponseBody", true));
             this.txtBody.Dock = DockStyle.Fill;
             this.txtBody.Font = new Font("Consolas", 9F);
-            this.txtBody.Location = new Point(3, 31);
+            this.txtBody.Location = new Point(3, 19);
             this.txtBody.Multiline = true;
             this.txtBody.Name = "txtBody";
             this.txtBody.ReadOnly = true;
             this.txtBody.ScrollBars = ScrollBars.Both;
-            this.txtBody.Size = new Size(894, 146);
+            this.txtBody.Size = new Size(894, 158);
             this.txtBody.TabIndex = 0;
             // 
             // grpResponseBody
             // 
             this.grpResponseBody.Controls.Add(this.txtResponseBody);
             this.grpResponseBody.Dock = DockStyle.Top;
-            this.grpResponseBody.Location = new Point(0, 381);
+            this.grpResponseBody.Location = new Point(0, 363);
             this.grpResponseBody.Name = "grpResponseBody";
             this.grpResponseBody.Size = new Size(900, 180);
             this.grpResponseBody.TabIndex = 1;
@@ -323,19 +323,19 @@ namespace chd.Tools.LogServer.Controls
             this.txtResponseBody.DataBindings.Add(new Binding("Text", this.bindingSourceDto, "Body", true));
             this.txtResponseBody.Dock = DockStyle.Fill;
             this.txtResponseBody.Font = new Font("Consolas", 9F);
-            this.txtResponseBody.Location = new Point(3, 31);
+            this.txtResponseBody.Location = new Point(3, 19);
             this.txtResponseBody.Multiline = true;
             this.txtResponseBody.Name = "txtResponseBody";
             this.txtResponseBody.ReadOnly = true;
             this.txtResponseBody.ScrollBars = ScrollBars.Both;
-            this.txtResponseBody.Size = new Size(894, 146);
+            this.txtResponseBody.Size = new Size(894, 158);
             this.txtResponseBody.TabIndex = 0;
             // 
             // grpHeaders
             // 
             this.grpHeaders.Controls.Add(this.dgvHeaders);
             this.grpHeaders.Dock = DockStyle.Fill;
-            this.grpHeaders.Location = new Point(0, 741);
+            this.grpHeaders.Location = new Point(0, 723);
             this.grpHeaders.Name = "grpHeaders";
             this.grpHeaders.Size = new Size(900, 0);
             this.grpHeaders.TabIndex = 0;
@@ -349,7 +349,7 @@ namespace chd.Tools.LogServer.Controls
             this.dgvHeaders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvHeaders.ColumnHeadersHeight = 40;
             this.dgvHeaders.Dock = DockStyle.Fill;
-            this.dgvHeaders.Location = new Point(3, 31);
+            this.dgvHeaders.Location = new Point(3, 19);
             this.dgvHeaders.Name = "dgvHeaders";
             this.dgvHeaders.ReadOnly = true;
             this.dgvHeaders.RowHeadersWidth = 72;

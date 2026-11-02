@@ -10,7 +10,7 @@ namespace chd.Tools.LogServer.Middleware
 {
     public class WebLogger(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, WebLoggerCache cache, AppSettings settings, CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, WebLoggerCache cache, HttpLogSettings settings, CallLogger callLogger)
         {
             var dto = new HttpCallDto();
             await dto.Initialize(context);
@@ -37,7 +37,7 @@ namespace chd.Tools.LogServer.Middleware
             cache.UpdateData();
         }
 
-        private bool IsSignalRRequest(HttpContext context, AppSettings settings)
+        private bool IsSignalRRequest(HttpContext context, HttpLogSettings settings)
             => settings.UseSignalR
                  && context.Request is { Method: "POST", Path.HasValue: true } 
                  && context.Request.Path.Value.EndsWith("negotiate");

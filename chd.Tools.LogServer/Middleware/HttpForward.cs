@@ -6,7 +6,7 @@ namespace chd.Tools.LogServer.Middleware
 {
     public class HttpForward(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, AppSettings settings, IHttpClientFactory httpClientFactory, CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, HttpLogSettings settings, IHttpClientFactory httpClientFactory, CallLogger callLogger)
         {
             if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && !context.WebSockets.IsWebSocketRequest)

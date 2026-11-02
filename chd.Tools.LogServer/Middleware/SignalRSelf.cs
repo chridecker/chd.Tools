@@ -17,7 +17,7 @@ namespace chd.Tools.LogServer.Middleware
 {
     public class SignalRSelf(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, AppSettings settings, SignalRCache cache, CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, HttpLogSettings settings, SignalRCache cache, CallLogger callLogger)
         {
             if (string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && !context.WebSockets.IsWebSocketRequest

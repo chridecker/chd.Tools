@@ -32,7 +32,7 @@ namespace chd.Tools.LogServer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             this.tabControl1 = new TabControl();
             this.tabPage2 = new TabPage();
             this.splitContainer1 = new SplitContainer();
@@ -64,21 +64,21 @@ namespace chd.Tools.LogServer
             this.bindingSourceSignalRLog = new BindingSource(this.components);
             this.signalrCallDtoControl1 = new chd.Tools.LogServer.Controls.SignalRCallDtoControl();
             this.tabPage1 = new TabPage();
+            this.groupBox1 = new GroupBox();
+            this.labelPort = new Label();
+            this.textBox1 = new TextBox();
+            this.bindingSourceAppsetting = new BindingSource(this.components);
+            this.comboBox1 = new ComboBox();
             this.groupBoxSettings = new GroupBox();
             this.buttonLogServer = new Button();
             this.textBoxLogPort = new TextBox();
-            this.label3 = new Label();
-            this.label2 = new Label();
-            this.comboBoxIPs = new ComboBox();
             this.checkBoxUseSignalR = new CheckBox();
-            this.bindingSourceAppsetting = new BindingSource(this.components);
+            this.label3 = new Label();
             this.label1 = new Label();
+            this.label2 = new Label();
             this.textBox2 = new TextBox();
-            this.comboBox1 = new ComboBox();
-            this.textBox1 = new TextBox();
+            this.comboBoxIPs = new ComboBox();
             this.tabControl2 = new TabControl();
-            this.groupBox1 = new GroupBox();
-            this.labelPort = new Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -95,9 +95,9 @@ namespace chd.Tools.LogServer
             ((System.ComponentModel.ISupportInitialize)this.dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.bindingSourceSignalRLog).BeginInit();
             this.tabPage1.SuspendLayout();
-            this.groupBoxSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.bindingSourceAppsetting).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.bindingSourceAppsetting).BeginInit();
+            this.groupBoxSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -172,8 +172,8 @@ namespace chd.Tools.LogServer
             // 
             this.dateTimeOffsetDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             this.dateTimeOffsetDataGridViewTextBoxColumn.DataPropertyName = "DateTimeOffset";
-            dataGridViewCellStyle4.Format = "HH:mm:ss dd.MM.yyyy";
-            this.dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "HH:mm:ss dd.MM.yyyy";
+            this.dateTimeOffsetDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.dateTimeOffsetDataGridViewTextBoxColumn.HeaderText = "Time";
             this.dateTimeOffsetDataGridViewTextBoxColumn.MinimumWidth = 9;
             this.dateTimeOffsetDataGridViewTextBoxColumn.Name = "dateTimeOffsetDataGridViewTextBoxColumn";
@@ -447,6 +447,52 @@ namespace chd.Tools.LogServer
             this.tabPage1.Text = "Server";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.labelPort);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Location = new Point(853, 135);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new Size(884, 852);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Response";
+            // 
+            // labelPort
+            // 
+            this.labelPort.AutoSize = true;
+            this.labelPort.Location = new Point(30, 43);
+            this.labelPort.Margin = new Padding(5, 0, 5, 0);
+            this.labelPort.Name = "labelPort";
+            this.labelPort.Size = new Size(117, 30);
+            this.labelPort.TabIndex = 2;
+            this.labelPort.Text = "StatusCode";
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new Binding("Text", this.bindingSourceAppsetting, "Response", true, DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Location = new Point(8, 93);
+            this.textBox1.Margin = new Padding(5, 6, 5, 6);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = ScrollBars.Vertical;
+            this.textBox1.Size = new Size(868, 751);
+            this.textBox1.TabIndex = 8;
+            // 
+            // bindingSourceAppsetting
+            // 
+            this.bindingSourceAppsetting.DataSource = typeof(Settings.HttpLogSettings);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new Point(157, 43);
+            this.comboBox1.Margin = new Padding(5, 6, 5, 6);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new Size(357, 38);
+            this.comboBox1.TabIndex = 9;
+            // 
             // groupBoxSettings
             // 
             this.groupBoxSettings.Controls.Add(this.buttonLogServer);
@@ -459,7 +505,7 @@ namespace chd.Tools.LogServer
             this.groupBoxSettings.Controls.Add(this.comboBoxIPs);
             this.groupBoxSettings.Location = new Point(8, 15);
             this.groupBoxSettings.Name = "groupBoxSettings";
-            this.groupBoxSettings.Size = new Size(583, 212);
+            this.groupBoxSettings.Size = new Size(583, 324);
             this.groupBoxSettings.TabIndex = 13;
             this.groupBoxSettings.TabStop = false;
             this.groupBoxSettings.Text = "Settings";
@@ -483,6 +529,18 @@ namespace chd.Tools.LogServer
             this.textBoxLogPort.Text = "5601";
             this.textBoxLogPort.TextChanged += this.textBoxLogPort_TextChanged;
             // 
+            // checkBoxUseSignalR
+            // 
+            this.checkBoxUseSignalR.AutoSize = true;
+            this.checkBoxUseSignalR.DataBindings.Add(new Binding("Checked", this.bindingSourceAppsetting, "UseSignalR", true, DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBoxUseSignalR.Location = new Point(419, 184);
+            this.checkBoxUseSignalR.Margin = new Padding(5, 6, 5, 6);
+            this.checkBoxUseSignalR.Name = "checkBoxUseSignalR";
+            this.checkBoxUseSignalR.Size = new Size(148, 34);
+            this.checkBoxUseSignalR.TabIndex = 12;
+            this.checkBoxUseSignalR.Text = "Use SignalR";
+            this.checkBoxUseSignalR.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -491,39 +549,6 @@ namespace chd.Tools.LogServer
             this.label3.Size = new Size(50, 30);
             this.label3.TabIndex = 2;
             this.label3.Text = "Port";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new Point(6, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new Size(31, 30);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "IP";
-            // 
-            // comboBoxIPs
-            // 
-            this.comboBoxIPs.FormattingEnabled = true;
-            this.comboBoxIPs.Location = new Point(43, 44);
-            this.comboBoxIPs.Name = "comboBoxIPs";
-            this.comboBoxIPs.Size = new Size(279, 38);
-            this.comboBoxIPs.TabIndex = 0;
-            // 
-            // checkBoxUseSignalR
-            // 
-            this.checkBoxUseSignalR.AutoSize = true;
-            this.checkBoxUseSignalR.DataBindings.Add(new Binding("Checked", this.bindingSourceAppsetting, "UseSignalR", true, DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBoxUseSignalR.Location = new Point(6, 161);
-            this.checkBoxUseSignalR.Margin = new Padding(5, 6, 5, 6);
-            this.checkBoxUseSignalR.Name = "checkBoxUseSignalR";
-            this.checkBoxUseSignalR.Size = new Size(148, 34);
-            this.checkBoxUseSignalR.TabIndex = 12;
-            this.checkBoxUseSignalR.Text = "Use SignalR";
-            this.checkBoxUseSignalR.UseVisualStyleBackColor = true;
-            // 
-            // bindingSourceAppsetting
-            // 
-            this.bindingSourceAppsetting.DataSource = typeof(Settings.AppSettings);
             // 
             // label1
             // 
@@ -535,6 +560,15 @@ namespace chd.Tools.LogServer
             this.label1.TabIndex = 11;
             this.label1.Text = "Forward Url";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new Point(6, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new Size(31, 30);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "IP";
+            // 
             // textBox2
             // 
             this.textBox2.DataBindings.Add(new Binding("Text", this.bindingSourceAppsetting, "ForwardUrl", true));
@@ -544,25 +578,13 @@ namespace chd.Tools.LogServer
             this.textBox2.Size = new Size(435, 35);
             this.textBox2.TabIndex = 10;
             // 
-            // comboBox1
+            // comboBoxIPs
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new Point(157, 43);
-            this.comboBox1.Margin = new Padding(5, 6, 5, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new Size(357, 38);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // textBox1
-            // 
-            this.textBox1.DataBindings.Add(new Binding("Text", this.bindingSourceAppsetting, "Response", true, DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Location = new Point(8, 93);
-            this.textBox1.Margin = new Padding(5, 6, 5, 6);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = ScrollBars.Vertical;
-            this.textBox1.Size = new Size(868, 751);
-            this.textBox1.TabIndex = 8;
+            this.comboBoxIPs.FormattingEnabled = true;
+            this.comboBoxIPs.Location = new Point(43, 44);
+            this.comboBoxIPs.Name = "comboBoxIPs";
+            this.comboBoxIPs.Size = new Size(279, 38);
+            this.comboBoxIPs.TabIndex = 0;
             // 
             // tabControl2
             // 
@@ -572,28 +594,6 @@ namespace chd.Tools.LogServer
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new Size(14, 16);
             this.tabControl2.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.labelPort);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new Point(14, 251);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new Size(884, 852);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Response";
-            // 
-            // labelPort
-            // 
-            this.labelPort.AutoSize = true;
-            this.labelPort.Location = new Point(30, 43);
-            this.labelPort.Margin = new Padding(5, 0, 5, 0);
-            this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new Size(117, 30);
-            this.labelPort.TabIndex = 2;
-            this.labelPort.Text = "StatusCode";
             // 
             // MainForm
             // 
@@ -620,11 +620,11 @@ namespace chd.Tools.LogServer
             ((System.ComponentModel.ISupportInitialize)this.dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.bindingSourceSignalRLog).EndInit();
             this.tabPage1.ResumeLayout(false);
-            this.groupBoxSettings.ResumeLayout(false);
-            this.groupBoxSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.bindingSourceAppsetting).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.bindingSourceAppsetting).EndInit();
+            this.groupBoxSettings.ResumeLayout(false);
+            this.groupBoxSettings.PerformLayout();
             this.ResumeLayout(false);
         }
 

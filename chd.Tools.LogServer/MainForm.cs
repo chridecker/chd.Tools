@@ -12,13 +12,13 @@ namespace chd.Tools.LogServer
 {
     public partial class MainForm : Form
     {
-        private readonly AppSettings _appSettings;
+        private readonly HttpLogSettings _appSettings;
         private readonly WebLoggerCache _cache;
         private readonly SignalRCache _signalRCache;
         private readonly IModuleManager _moduleManager;
         private readonly IServiceProvider _serviceProvider;
 
-        public MainForm(AppSettings appSettings, WebLoggerCache cache,
+        public MainForm(HttpLogSettings appSettings, WebLoggerCache cache,
             SignalRCache signalRCache,
             IModuleManager moduleManager, IServiceProvider serviceProvider)
         {
@@ -31,7 +31,7 @@ namespace chd.Tools.LogServer
             _signalRCache.DataChanged += _signalRCache_DataChanged;
             InitializeComponent();
 
-            this._moduleManager.Set<WebModuleSettings, int>(nameof(LogModule),
+            this._moduleManager.Set<WebModuleSettings, int>(nameof(httpLogModule),
                 x => x.Port,
                 int.TryParse(textBoxLogPort.Text, out var port) ? port : 0);
 
@@ -146,7 +146,7 @@ namespace chd.Tools.LogServer
             comboBox1.DisplayMember = "Text";
             comboBox1.ValueMember = "Value";
 
-            comboBox1.DataBindings.Add("SelectedValue", _appSettings, nameof(AppSettings.ResponseStatusCode), true,
+            comboBox1.DataBindings.Add("SelectedValue", _appSettings, nameof(HttpLogSettings.ResponseStatusCode), true,
                 DataSourceUpdateMode.OnPropertyChanged);
         }
         private void LoadIpAddresses()
@@ -166,7 +166,7 @@ namespace chd.Tools.LogServer
         {
             if (sender is Button b)
             {
-                await this.Toggle(nameof(LogModule), b);
+                await this.Toggle(nameof(httpLogModule), b);
             }
         }
         private async Task Toggle(string name, Button button)
@@ -201,7 +201,7 @@ namespace chd.Tools.LogServer
             if (sender is TextBox textBox
                 && int.TryParse(textBox.Text, out var port))
             {
-                _moduleManager.Set<WebModuleSettings,int>(nameof(LogModule), x => x.Port, port);
+                _moduleManager.Set<WebModuleSettings,int>(nameof(httpLogModule), x => x.Port, port);
             }
         }
     }

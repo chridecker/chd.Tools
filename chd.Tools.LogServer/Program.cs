@@ -8,7 +8,7 @@ using chd.Tools.LogServer.Modules;
 Thread.CurrentThread.SetApartmentState(ApartmentState.Unknown);
 Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
 
-var setting = new AppSettings();
+var setting = new HttpLogSettings();
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -36,7 +36,7 @@ builder.Logging.ClearProviders();
 
 builder.Services.AddWindowsFormsLifetime<MainForm>();
 
-builder.AddModuleManager(typeof(LogModule));
+builder.AddModuleManager(typeof(httpLogModule));
 
 builder.Services.AddTools(setting);
 

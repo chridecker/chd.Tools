@@ -2,7 +2,7 @@
 
 namespace chd.Tools.LogServer.Settings
 {
-    public class AppSettings
+    public class HttpLogSettings
     {
         public HttpStatusCode ResponseStatusCode { get; set; } = HttpStatusCode.OK;
         public string Response { get; set; } = string.Empty;

@@ -10,7 +10,7 @@ namespace chd.Tools.LogServer.Middleware
 {
     public class SignalRForward(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, AppSettings settings, SignalRCache cache)
+        public async Task InvokeAsync(HttpContext context, HttpLogSettings settings, SignalRCache cache)
         {
              if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && context.WebSockets.IsWebSocketRequest)
