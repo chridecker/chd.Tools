@@ -1,13 +1,15 @@
 ﻿using chd.Tools.LogServer.Services;
 using chd.Tools.LogServer.Settings;
 using System.Net.WebSockets;
+using Microsoft.Extensions.Options;
 
 namespace chd.Tools.LogServer.Middleware
 {
     public class HttpForward(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, HttpLogSettings settings, IHttpClientFactory httpClientFactory, CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, IOptionsMonitor<HttpLogSettings >optionsMonitor, IHttpClientFactory httpClientFactory, CallLogger callLogger)
         {
+            var settings = optionsMonitor.CurrentValue;
             if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && !context.WebSockets.IsWebSocketRequest)
             {

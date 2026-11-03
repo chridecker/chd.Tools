@@ -6,7 +6,8 @@ namespace chd.Tools.LogServer.Settings
     {
         public HttpStatusCode ResponseStatusCode { get; set; } = HttpStatusCode.OK;
         public string Response { get; set; } = string.Empty;
+        public string ResponseContentType { get; set; } = "application/json";
+        public bool UseSignalR { get; set; }
         public string ForwardUrl { get; set; }
-        public bool UseSignalR{ get; set; }
     }
 }

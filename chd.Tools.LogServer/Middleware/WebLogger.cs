@@ -10,8 +10,9 @@ namespace chd.Tools.LogServer.Middleware
 {
     public class WebLogger(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, WebLoggerCache cache, HttpLogSettings settings, CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, WebLoggerCache cache, IOptionsMonitor<HttpLogSettings> optionsMonitor, CallLogger callLogger)
         {
+            var settings = optionsMonitor.CurrentValue;
             var dto = new HttpCallDto();
             await dto.Initialize(context);
             if (string.IsNullOrWhiteSpace(settings.ForwardUrl)

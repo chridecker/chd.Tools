@@ -6,65 +6,42 @@ using chd.Tools.LogServer.Modules;
 using chd.Tools.LogServer.Services;
 using chd.Tools.LogServer.Settings;
 using System.Net;
-using System.Net.NetworkInformation;
+using chd.Base.Hosting.Forms.Base;
+using chd.Base.Hosting.Forms.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace chd.Tools.LogServer
 {
-    public partial class MainForm : Form
+    public partial class MainForm : BaseDiForm
     {
-        private readonly HttpLogSettings _appSettings;
+
+        private HttpLogSettings _httpLogSettings => _optionsMonitor.CurrentValue;
         private readonly WebLoggerCache _cache;
         private readonly SignalRCache _signalRCache;
-        private readonly IModuleManager _moduleManager;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IOptionsMonitor<HttpLogSettings> _optionsMonitor;
 
-        public MainForm(HttpLogSettings appSettings, WebLoggerCache cache,
+        public MainForm(WebLoggerCache cache,
             SignalRCache signalRCache,
-            IModuleManager moduleManager, IServiceProvider serviceProvider)
+            IOptionsMonitor<HttpLogSettings> optionsMonitor,
+            IModuleManager moduleManager, IServiceProvider serviceProvider) : base(moduleManager, serviceProvider)
         {
-            _appSettings = appSettings;
             _cache = cache;
             _cache.DataChanged += _cache_DataChanged;
             _signalRCache = signalRCache;
-            this._moduleManager = moduleManager;
-            this._serviceProvider = serviceProvider;
+            _optionsMonitor = optionsMonitor;
             _signalRCache.DataChanged += _signalRCache_DataChanged;
             InitializeComponent();
 
-            this._moduleManager.Set<WebModuleSettings, int>(nameof(httpLogModule),
-                x => x.Port,
-                int.TryParse(textBoxLogPort.Text, out var port) ? port : 0);
-
-            this.FormClosing += MainForm_FormClosing;
-
-            this.bindingSourceAppsetting.DataSource = _appSettings;
+            this.bindingSourceHttpLogSetting.DataSource = _httpLogSettings;
             this.LoadStatusCodes();
-            this.LoadIpAddresses();
             bindingSourceLogList.CurrentChanged += BindingSourceLogList_CurrentChanged;
             bindingSourceSignalRLog.CurrentChanged += BindingSourceSignalRLog_CurrentChanged;
             dataGridView1.CellMouseClick += DataGridView1_CellMouseClick;
             dataGridView2.CellMouseDoubleClick += DataGridView2_CellMouseDoubleClick;
-            NetworkChange.NetworkAddressChanged += OnNetworkAddressChanged;
         }
 
-        private async void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing
-                && _moduleManager.Names.Any(a => _moduleManager.IsRunning(a))
-                && MessageBox.Show("Server currently running! Do you really want to exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
-                DialogResult.No)
-            {
-                e.Cancel = true;
-            }
-        }
 
-        private void OnNetworkAddressChanged(object? sender, EventArgs e)
-        {
-            if (IsHandleCreated && !IsDisposed)
-            {
-                BeginInvoke(LoadIpAddresses);
-            }
-        }
+
 
         private async void DataGridView2_CellMouseDoubleClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
@@ -145,63 +122,38 @@ namespace chd.Tools.LogServer
                 .ToList();
             comboBox1.DisplayMember = "Text";
             comboBox1.ValueMember = "Value";
+            comboBox1.SelectedValueChanged += ComboBox1_SelectedValueChanged;
+            comboBox1.SelectedValue = this._httpLogSettings.ResponseStatusCode;
 
-            comboBox1.DataBindings.Add("SelectedValue", _appSettings, nameof(HttpLogSettings.ResponseStatusCode), true,
-                DataSourceUpdateMode.OnPropertyChanged);
-        }
-        private void LoadIpAddresses()
-        {
-            var previous = (comboBoxIPs.SelectedItem as IpOption)?.Address;
-
-            var items = IpAddressProvider.GetAvailable();
-            comboBoxIPs.DataSource = null;
-            comboBoxIPs.DataSource = items;
-
-            var selected = items.FirstOrDefault(i => i.Address.Equals(previous))
-                           ?? items.First(x => Equals(x.Address, IPAddress.Loopback));
-            comboBoxIPs.SelectedItem = selected;
         }
 
-        private async void buttonLogServer_Click(object sender, EventArgs e)
+        private void ComboBox1_SelectedValueChanged(object? sender, EventArgs e)
         {
-            if (sender is Button b)
+            if (sender is ComboBox cB
+                && cB.SelectedValue is HttpStatusCode statusCode)
             {
-                await this.Toggle(nameof(httpLogModule), b);
+                _moduleManager.SetCustom<HttpLogSettings, HttpStatusCode>(x => x.ResponseStatusCode, statusCode, nameof(HttpLogModule));
             }
         }
-        private async Task Toggle(string name, Button button)
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            button.Enabled = false;
-            try
+            if (sender is TextBox tB)
             {
-                if (_moduleManager.IsRunning(name))
-                {
-                    await _moduleManager.StopAsync(name);
-                    button.Text = $"Start";
-                    comboBoxIPs.Enabled = !_moduleManager.Names.Any(_moduleManager.IsRunning);
-                }
-                else
-                {
-                    var ip = (comboBoxIPs.SelectedItem as IpOption)?.Address ?? IPAddress.Loopback;
-                    _moduleManager.Set<WebModuleSettings, string>(name, x => x.Host, ip.ToString());
-                    await _moduleManager.StartAsync(name);
-                    button.Text = $"Stop";
-                    comboBoxIPs.Enabled = false;
-                }
+                _moduleManager.SetCustom<HttpLogSettings, string>(x => x.ForwardUrl, tB.Text, nameof(HttpLogModule));
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, $"{name} Fehler");
-            }
-            finally { button.Enabled = true; }
         }
 
-        private void textBoxLogPort_TextChanged(object sender, EventArgs e)
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (sender is TextBox textBox
-                && int.TryParse(textBox.Text, out var port))
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (sender is TextBox tB)
             {
-                _moduleManager.Set<WebModuleSettings,int>(nameof(httpLogModule), x => x.Port, port);
+                _moduleManager.SetCustom<HttpLogSettings, string>(x => x.ResponseContentType, tB.Text, nameof(HttpLogModule));
             }
         }
     }

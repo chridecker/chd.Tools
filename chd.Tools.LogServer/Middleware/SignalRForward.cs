@@ -5,13 +5,15 @@ using chd.Tools.LogServer.Settings;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using System.Net.WebSockets;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace chd.Tools.LogServer.Middleware
 {
     public class SignalRForward(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, HttpLogSettings settings, SignalRCache cache)
+        public async Task InvokeAsync(HttpContext context, IOptionsMonitor<HttpLogSettings> optionsMonitor, SignalRCache cache)
         {
+            var settings = optionsMonitor.CurrentValue;
              if (!string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && context.WebSockets.IsWebSocketRequest)
             {

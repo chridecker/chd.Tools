@@ -11,14 +11,15 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Channels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Extensions.Options;
 
 namespace chd.Tools.LogServer.Middleware
 {
     public class SignalRSelf(RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, HttpLogSettings settings, SignalRCache cache, CallLogger callLogger)
+        public async Task InvokeAsync(HttpContext context, IOptionsMonitor<HttpLogSettings> optionsMonitor, SignalRCache cache, CallLogger callLogger)
         {
+            var settings = optionsMonitor.CurrentValue; 
             if (string.IsNullOrWhiteSpace(settings.ForwardUrl)
                 && !context.WebSockets.IsWebSocketRequest
                 && context.Request is { Method: "POST", Path.HasValue: true }
