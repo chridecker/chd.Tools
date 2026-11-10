@@ -20,7 +20,7 @@ namespace chd.Tools.LogServer.Middleware
                 && !IsSignalRRequest(context, settings))
             {
                 context.Response.StatusCode = (int)settings.ResponseStatusCode;
-                context.Response.ContentType = "application/json";
+                context.Response.ContentType = settings.ResponseContentType;
                 await context.Response.WriteAsync(settings.Response, context.RequestAborted);
                 dto.ResponseStatusCode = settings.ResponseStatusCode;
                 dto.ResponseBody = settings.Response;

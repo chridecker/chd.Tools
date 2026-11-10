@@ -16,7 +16,6 @@ builder.AddModuleManager().AddModule<HttpLogModule>();
 builder.Services.AddSingleton<WebLoggerCache>();
 builder.Services.AddSingleton<SignalRCache>();
 
-
 builder.ConfigureDynamic<HttpLogSettings>();
 
 var host = builder.Build();

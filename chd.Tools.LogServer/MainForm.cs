@@ -156,5 +156,13 @@ namespace chd.Tools.LogServer
                 _moduleManager.SetCustom<HttpLogSettings, string>(x => x.ResponseContentType, tB.Text, nameof(HttpLogModule));
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (sender is TextBox tB)
+            {
+                _moduleManager.SetCustom<HttpLogSettings, string>(x => x.Response, tB.Text, nameof(HttpLogModule));
+            }
+        }
     }
 }

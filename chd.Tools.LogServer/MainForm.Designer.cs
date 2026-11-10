@@ -35,14 +35,12 @@ namespace chd.Tools.LogServer
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPageServer = new TabPage();
-            chooseIpComboBox1 = new chd.Base.Hosting.Forms.Controls.ChooseIpComboBox();
-            label2 = new Label();
             groupBox1 = new GroupBox();
             textBox3 = new TextBox();
+            bindingSourceHttpLogSetting = new BindingSource(components);
             label3 = new Label();
             labelPort = new Label();
             textBox1 = new TextBox();
-            bindingSourceHttpLogSetting = new BindingSource(components);
             comboBox1 = new ComboBox();
             label1 = new Label();
             checkBoxUseSignalR = new CheckBox();
@@ -103,8 +101,6 @@ namespace chd.Tools.LogServer
             // 
             // tabPageServer
             // 
-            tabPageServer.Controls.Add(chooseIpComboBox1);
-            tabPageServer.Controls.Add(label2);
             tabPageServer.Controls.Add(groupBox1);
             tabPageServer.Controls.Add(label1);
             tabPageServer.Controls.Add(checkBoxUseSignalR);
@@ -119,24 +115,6 @@ namespace chd.Tools.LogServer
             tabPageServer.Text = "Server";
             tabPageServer.UseVisualStyleBackColor = true;
             // 
-            // chooseIpComboBox1
-            // 
-            chooseIpComboBox1.FormattingEnabled = true;
-            chooseIpComboBox1.Location = new Point(26, 6);
-            chooseIpComboBox1.Name = "chooseIpComboBox1";
-            chooseIpComboBox1.Size = new Size(159, 23);
-            chooseIpComboBox1.TabIndex = 13;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(4, 9);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(17, 15);
-            label2.TabIndex = 1;
-            label2.Text = "IP";
-            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(textBox3);
@@ -144,7 +122,7 @@ namespace chd.Tools.LogServer
             groupBox1.Controls.Add(labelPort);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(comboBox1);
-            groupBox1.Location = new Point(18, 109);
+            groupBox1.Location = new Point(17, 162);
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
@@ -161,6 +139,10 @@ namespace chd.Tools.LogServer
             textBox3.Size = new Size(171, 23);
             textBox3.TabIndex = 11;
             textBox3.TextChanged += textBox3_TextChanged;
+            // 
+            // bindingSourceHttpLogSetting
+            // 
+            bindingSourceHttpLogSetting.DataSource = typeof(HttpLogSettings);
             // 
             // label3
             // 
@@ -189,10 +171,7 @@ namespace chd.Tools.LogServer
             textBox1.ScrollBars = ScrollBars.Vertical;
             textBox1.Size = new Size(508, 378);
             textBox1.TabIndex = 8;
-            // 
-            // bindingSourceHttpLogSetting
-            // 
-            bindingSourceHttpLogSetting.DataSource = typeof(HttpLogSettings);
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // comboBox1
             // 
@@ -205,7 +184,7 @@ namespace chd.Tools.LogServer
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(18, 84);
+            label1.Location = new Point(17, 137);
             label1.Name = "label1";
             label1.Size = new Size(68, 15);
             label1.TabIndex = 11;
@@ -215,7 +194,7 @@ namespace chd.Tools.LogServer
             // 
             checkBoxUseSignalR.AutoSize = true;
             checkBoxUseSignalR.DataBindings.Add(new Binding("Checked", bindingSourceHttpLogSetting, "UseSignalR", true, DataSourceUpdateMode.OnPropertyChanged));
-            checkBoxUseSignalR.Location = new Point(257, 84);
+            checkBoxUseSignalR.Location = new Point(256, 137);
             checkBoxUseSignalR.Name = "checkBoxUseSignalR";
             checkBoxUseSignalR.Size = new Size(87, 19);
             checkBoxUseSignalR.TabIndex = 12;
@@ -225,7 +204,7 @@ namespace chd.Tools.LogServer
             // textBox2
             // 
             textBox2.DataBindings.Add(new Binding("Text", bindingSourceHttpLogSetting, "ForwardUrl", true, DataSourceUpdateMode.Never));
-            textBox2.Location = new Point(92, 81);
+            textBox2.Location = new Point(91, 134);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(159, 23);
             textBox2.TabIndex = 10;
@@ -241,11 +220,13 @@ namespace chd.Tools.LogServer
             // 
             // webModuleHttpLog
             // 
-            webModuleHttpLog.Location = new Point(6, 35);
+            webModuleHttpLog.ChoosenIP = null;
+            webModuleHttpLog.Location = new Point(8, 6);
             webModuleHttpLog.ModuleDefaultPort = 5601;
+            webModuleHttpLog.ModuleDefaultSslPort = null;
             webModuleHttpLog.ModuleName = "HttpLogModule";
             webModuleHttpLog.Name = "webModuleHttpLog";
-            webModuleHttpLog.Size = new Size(545, 519);
+            webModuleHttpLog.Size = new Size(545, 597);
             webModuleHttpLog.TabIndex = 14;
             // 
             // tabPageHttpLog
@@ -491,13 +472,11 @@ namespace chd.Tools.LogServer
         private DataGridViewTextBoxColumn queryDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn headersDataGridViewTextBoxColumn1;
         private CheckBox checkBoxUseSignalR;
-        private Label label2;
         private GroupBox groupBox1;
         private Label labelPort;
         private TabPage tabPageLog;
         private Base.Hosting.Forms.Controls.ChannelLogControl channelLogControl1;
         private Base.Hosting.Forms.Controls.WebModuleControl webModuleHttpLog;
-        private Base.Hosting.Forms.Controls.ChooseIpComboBox chooseIpComboBox1;
         private Controls.HttpCallDtoControl httpCallDtoControl1;
         private Controls.SignalRCallDtoControl signalrCallDtoControl1;
         private BindingSource bindingSourceLogList;

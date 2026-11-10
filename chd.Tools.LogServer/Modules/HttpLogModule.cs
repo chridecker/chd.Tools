@@ -35,13 +35,14 @@ namespace chd.Tools.LogServer.Modules
             app.UseMiddleware<SignalRSelf>();
         }
 
-        public override async Task StopModuleAsync(CancellationToken cancellationToken = default)
+        protected override async Task ModuleStopped(CancellationToken cancellationToken)
         {
             foreach (var dto in signalRCache.Data.Where(x => x.Connected))
             {
                 await dto.SendClose(CancellationToken.None);
             }
-            await base.StopModuleAsync(cancellationToken);
+            await base.ModuleStopped(cancellationToken);
         }
+
     }
 }
