@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="chd.Base.Hosting.Forms" Version="2.0.26316.221" />
+		<PackageReference Include="chd.Base.Hosting.Forms" Version="2.0.26323.225" />
 	</ItemGroup>
 
 </Project>
